@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "arena/**"]
+  pull_request:
+
+jobs:
+  converter:
+    name: Python converter tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: pip install jsonschema pytest
+      - name: pytest
+        run: cd converter && python -m pytest tests/ -q
+
+  addon:
+    name: Bedrock add-on tests + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Unit tests (node:test)
+        run: |
+          cd bedrock_addon
+          npm test
+      - name: Regenerate tint vectors + compare (parity pin)
+        run: |
+          node bedrock_addon/scripts/gen_tint_vectors.mjs
+          git diff --exit-code bedrock_addon/shared/tint_vectors.json
+      - name: Build + validate mcaddon
+        run: |
+          python3 scripts/build_addon.py --version 1.0.0
+          python3 scripts/validate_addon.py dist/Schematic3DBuilder-base.mcaddon
+          python3 scripts/validate_addon.py dist/Schematic3DBuilder.mcaddon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mcaddon
+          path: dist/*.mcaddon
+
+  app:
+    name: Flutter app (analyze + test + APK)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify generated assets are in sync
+        run: |
+          python3 app/tool/gen_arb.py --check
+          python3 app/tool/sync_addon_template.py
+          git diff --exit-code -- app/assets/addon_template app/assets/generated/tint_vectors.json app/lib/l10n/ || {
+            echo "::error::app assets/l10n out of sync — run app/tool/sync_addon_template.py and app/tool/gen_arb.py"; exit 1; }
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          cache: true
+      - name: pub get
+        run: cd app && flutter pub get
+      - name: Regenerate localizations
+        run: cd app && flutter gen-l10n
+      - name: Analyze
+        run: cd app && flutter analyze --no-fatal-infos
+      - name: Tests (pure domain + DB via ffi; no device needed)
+        run: cd app && flutter test
+      - name: Android scaffolding (generated if absent)
+        run: |
+          cd app
+          if [ ! -d android ]; then
+            flutter create --platforms=android --org com.nova.schematic3d \
+              --project-name schematic_3d .
+          fi
+      - name: Build release APK
+        run: cd app && flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk-release
+          path: app/build/app/outputs/flutter-apk/app-release.apk

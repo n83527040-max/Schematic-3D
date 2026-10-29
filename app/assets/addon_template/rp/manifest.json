@@ -1,0 +1,40 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Schematic 3D Builder [RP]",
+    "description": "Translucent ghost blocks and menu textures for Schematic 3D Builder.",
+    "uuid": "20074c74-7933-49c6-8f46-a9007b0bbeed",
+    "version": [
+      1,
+      0,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "98214920-0af1-40fe-b037-393259d38a20",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "be3e0039-eeb1-4f3f-a144-af0744193220",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "NOVA"
+    ],
+    "license": "MIT"
+  }
+}

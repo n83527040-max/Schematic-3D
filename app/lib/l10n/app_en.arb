@@ -1,0 +1,473 @@
+{
+  "@@locale": "en",
+  "appTitle": "Schematic 3D",
+  "@appTitle": {
+    "description": "appTitle"
+  },
+  "navLibrary": "Library",
+  "@navLibrary": {
+    "description": "navLibrary"
+  },
+  "navImport": "Import",
+  "@navImport": {
+    "description": "navImport"
+  },
+  "navGuide": "Guide",
+  "@navGuide": {
+    "description": "navGuide"
+  },
+  "navLog": "Log",
+  "@navLog": {
+    "description": "navLog"
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "navSettings"
+  },
+  "searchHint": "Search designs…",
+  "@searchHint": {
+    "description": "searchHint"
+  },
+  "categoryAll": "All",
+  "@categoryAll": {
+    "description": "categoryAll"
+  },
+  "sortLabel": "Sort",
+  "@sortLabel": {
+    "description": "sortLabel"
+  },
+  "sortByName": "Name",
+  "@sortByName": {
+    "description": "sortByName"
+  },
+  "sortBySize": "Size",
+  "@sortBySize": {
+    "description": "sortBySize"
+  },
+  "sortByBlocks": "Blocks",
+  "@sortByBlocks": {
+    "description": "sortByBlocks"
+  },
+  "sortByDate": "Date",
+  "@sortByDate": {
+    "description": "sortByDate"
+  },
+  "sortDescending": "Descending order",
+  "@sortDescending": {
+    "description": "sortDescending"
+  },
+  "emptyLibrary": "No designs yet",
+  "@emptyLibrary": {
+    "description": "emptyLibrary"
+  },
+  "emptyLibraryHint": "Use the Import tab to load .json / .mcstructure / .schem files",
+  "@emptyLibraryHint": {
+    "description": "emptyLibraryHint"
+  },
+  "libraryCount": "{n} design(s)",
+  "@libraryCount": {
+    "description": "libraryCount",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryPalaces": "Palaces",
+  "@categoryPalaces": {
+    "description": "categoryPalaces"
+  },
+  "categoryHouses": "Houses",
+  "@categoryHouses": {
+    "description": "categoryHouses"
+  },
+  "categoryTowers": "Towers",
+  "@categoryTowers": {
+    "description": "categoryTowers"
+  },
+  "categoryBridges": "Bridges",
+  "@categoryBridges": {
+    "description": "categoryBridges"
+  },
+  "categoryFarms": "Farms",
+  "@categoryFarms": {
+    "description": "categoryFarms"
+  },
+  "categoryDecor": "Decor",
+  "@categoryDecor": {
+    "description": "categoryDecor"
+  },
+  "categoryIndustrial": "Industrial",
+  "@categoryIndustrial": {
+    "description": "categoryIndustrial"
+  },
+  "categoryOther": "Other",
+  "@categoryOther": {
+    "description": "categoryOther"
+  },
+  "detailTab3d": "3D",
+  "@detailTab3d": {
+    "description": "detailTab3d"
+  },
+  "detailTabPlan": "Floor plan",
+  "@detailTabPlan": {
+    "description": "detailTabPlan"
+  },
+  "detailTabMaterials": "Materials",
+  "@detailTabMaterials": {
+    "description": "detailTabMaterials"
+  },
+  "detailTabInfo": "Info",
+  "@detailTabInfo": {
+    "description": "detailTabInfo"
+  },
+  "layersTitle": "Layers",
+  "@layersTitle": {
+    "description": "layersTitle"
+  },
+  "roomsTitle": "Rooms",
+  "@roomsTitle": {
+    "description": "roomsTitle"
+  },
+  "showAllLayers": "All layers",
+  "@showAllLayers": {
+    "description": "showAllLayers"
+  },
+  "resetView": "Reset view",
+  "@resetView": {
+    "description": "resetView"
+  },
+  "dragRotateHint": "Drag to rotate · pinch to zoom · double-tap resets",
+  "@dragRotateHint": {
+    "description": "dragRotateHint"
+  },
+  "sliceRange": "Slice Y {lo}–{hi}",
+  "@sliceRange": {
+    "description": "sliceRange",
+    "placeholders": {
+      "hi": {
+        "type": "Object"
+      },
+      "lo": {
+        "type": "Object"
+      }
+    }
+  },
+  "moveSliceUp": "Next level",
+  "@moveSliceUp": {
+    "description": "moveSliceUp"
+  },
+  "moveSliceDown": "Previous level",
+  "@moveSliceDown": {
+    "description": "moveSliceDown"
+  },
+  "totalBlocks": "Total blocks",
+  "@totalBlocks": {
+    "description": "totalBlocks"
+  },
+  "distinctMaterials": "Distinct materials",
+  "@distinctMaterials": {
+    "description": "distinctMaterials"
+  },
+  "blockCount": "blocks",
+  "@blockCount": {
+    "description": "blockCount"
+  },
+  "stacks": "stacks",
+  "@stacks": {
+    "description": "stacks"
+  },
+  "infoName": "Name",
+  "@infoName": {
+    "description": "infoName"
+  },
+  "infoDescription": "Description",
+  "@infoDescription": {
+    "description": "infoDescription"
+  },
+  "infoSource": "Imported from",
+  "@infoSource": {
+    "description": "infoSource"
+  },
+  "infoDims": "Dimensions",
+  "@infoDims": {
+    "description": "infoDims"
+  },
+  "infoPalette": "Palette",
+  "@infoPalette": {
+    "description": "infoPalette"
+  },
+  "infoDropped": "Dropped blocks",
+  "@infoDropped": {
+    "description": "infoDropped"
+  },
+  "infoNotes": "Conversion notes",
+  "@infoNotes": {
+    "description": "infoNotes"
+  },
+  "renameAction": "Rename",
+  "@renameAction": {
+    "description": "renameAction"
+  },
+  "moveCategory": "Move to folder",
+  "@moveCategory": {
+    "description": "moveCategory"
+  },
+  "deleteAction": "Delete",
+  "@deleteAction": {
+    "description": "deleteAction"
+  },
+  "confirmDelete": "Delete design?",
+  "@confirmDelete": {
+    "description": "confirmDelete"
+  },
+  "confirmDeleteMsg": "This removes the design and its files from the app only.",
+  "@confirmDeleteMsg": {
+    "description": "confirmDeleteMsg"
+  },
+  "deleted": "Deleted",
+  "@deleted": {
+    "description": "deleted"
+  },
+  "importPick": "Pick a file",
+  "@importPick": {
+    "description": "importPick"
+  },
+  "importPickHint": "Supported: schematic3d JSON, .mcstructure (Bedrock), .schem (Sponge v2 / Litematica), .schematic",
+  "@importPickHint": {
+    "description": "importPickHint"
+  },
+  "importWorking": "Converting…",
+  "@importWorking": {
+    "description": "importWorking"
+  },
+  "importResultOk": "Import completed",
+  "@importResultOk": {
+    "description": "importResultOk"
+  },
+  "importResultPartial": "Imported with warnings",
+  "@importResultPartial": {
+    "description": "importResultPartial"
+  },
+  "importResultFailed": "Conversion failed",
+  "@importResultFailed": {
+    "description": "importResultFailed"
+  },
+  "importFailKept": "The original file was kept in the app storage and recorded in the log.",
+  "@importFailKept": {
+    "description": "importFailKept"
+  },
+  "errorsTitle": "Errors",
+  "@errorsTitle": {
+    "description": "errorsTitle"
+  },
+  "warningsTitle": "Warnings",
+  "@warningsTitle": {
+    "description": "warningsTitle"
+  },
+  "unsupportedTitle": "Unsupported blocks (dropped)",
+  "@unsupportedTitle": {
+    "description": "unsupportedTitle"
+  },
+  "unsupportedHint": "These blocks have no Bedrock equivalent in this version. The design remains valid without them.",
+  "@unsupportedHint": {
+    "description": "unsupportedHint"
+  },
+  "noIssues": "No issues",
+  "@noIssues": {
+    "description": "noIssues"
+  },
+  "saveToLibrary": "Save to library",
+  "@saveToLibrary": {
+    "description": "saveToLibrary"
+  },
+  "copy": "Copy",
+  "@copy": {
+    "description": "copy"
+  },
+  "copied": "Copied to clipboard",
+  "@copied": {
+    "description": "copied"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "ok"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "cancel"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "close"
+  },
+  "exportJson": "Export JSON",
+  "@exportJson": {
+    "description": "exportJson"
+  },
+  "exportMcstructure": "Export .mcstructure",
+  "@exportMcstructure": {
+    "description": "exportMcstructure"
+  },
+  "exportAddon": "Export as MCAddon pack",
+  "@exportAddon": {
+    "description": "exportAddon"
+  },
+  "exportAddonBuilding": "Building .mcaddon…",
+  "@exportAddonBuilding": {
+    "description": "exportAddonBuilding"
+  },
+  "exportAddonShareHint": "Open the shared file with Minecraft (or copy it to your device), then activate both packs in your world.",
+  "@exportAddonShareHint": {
+    "description": "exportAddonShareHint"
+  },
+  "promptFab": "Copy AI prompt",
+  "@promptFab": {
+    "description": "promptFab"
+  },
+  "promptSheetTitle": "Prompt for external AI",
+  "@promptSheetTitle": {
+    "description": "promptSheetTitle"
+  },
+  "promptIncludeCurrent": "Include current design JSON",
+  "@promptIncludeCurrent": {
+    "description": "promptIncludeCurrent"
+  },
+  "promptExtraNotesHint": "Extra notes (optional)",
+  "@promptExtraNotesHint": {
+    "description": "promptExtraNotesHint"
+  },
+  "promptCopied": "Prompt copied — paste it into ChatGPT / Claude / Gemini",
+  "@promptCopied": {
+    "description": "promptCopied"
+  },
+  "promptOfflineNote": "This app has no built-in AI and no network calls; it only copies the text.",
+  "@promptOfflineNote": {
+    "description": "promptOfflineNote"
+  },
+  "logStatusSuccess": "Success",
+  "@logStatusSuccess": {
+    "description": "logStatusSuccess"
+  },
+  "logStatusPartial": "With warnings",
+  "@logStatusPartial": {
+    "description": "logStatusPartial"
+  },
+  "logStatusFailed": "Failed",
+  "@logStatusFailed": {
+    "description": "logStatusFailed"
+  },
+  "logColFile": "File",
+  "@logColFile": {
+    "description": "logColFile"
+  },
+  "logColStatus": "Status",
+  "@logColStatus": {
+    "description": "logColStatus"
+  },
+  "logOpenDesign": "Open design",
+  "@logOpenDesign": {
+    "description": "logOpenDesign"
+  },
+  "logClear": "Clear log",
+  "@logClear": {
+    "description": "logClear"
+  },
+  "logCleared": "Log cleared",
+  "@logCleared": {
+    "description": "logCleared"
+  },
+  "logUnsupportedN": "{n} unsupported block type(s)",
+  "@logUnsupportedN": {
+    "description": "logUnsupportedN",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "settingsLanguage"
+  },
+  "languageSystem": "System",
+  "@languageSystem": {
+    "description": "languageSystem"
+  },
+  "settingsDefaultView": "Default viewer",
+  "@settingsDefaultView": {
+    "description": "settingsDefaultView"
+  },
+  "settingsBatchSpeed": "Default batch speed",
+  "@settingsBatchSpeed": {
+    "description": "settingsBatchSpeed"
+  },
+  "settingsBatchSpeedHint": "Blocks per tick — the in-game slider overrides this per session.",
+  "@settingsBatchSpeedHint": {
+    "description": "settingsBatchSpeedHint"
+  },
+  "settingsAbout": "About",
+  "@settingsAbout": {
+    "description": "settingsAbout"
+  },
+  "settingsAboutText": "Schematic 3D v1.0.0 — fully offline. Target: Minecraft Bedrock 26.40.5 with the bundled Schematic 3D Builder add-on.",
+  "@settingsAboutText": {
+    "description": "settingsAboutText"
+  },
+  "settingsConfirmTitle": "Confirmation before building",
+  "@settingsConfirmTitle": {
+    "description": "settingsConfirmTitle"
+  },
+  "settingsConfirmAlways": "Always required (safety)",
+  "@settingsConfirmAlways": {
+    "description": "settingsConfirmAlways"
+  },
+  "guideAddonTitle": "Installing the add-on",
+  "@guideAddonTitle": {
+    "description": "guideAddonTitle"
+  },
+  "guideBuildFlow": "Build flow",
+  "@guideBuildFlow": {
+    "description": "guideBuildFlow"
+  },
+  "failureFileUnreadable": "Cannot read the file",
+  "@failureFileUnreadable": {
+    "description": "failureFileUnreadable"
+  },
+  "failureUnsupportedFormat": "Unsupported file format",
+  "@failureUnsupportedFormat": {
+    "description": "failureUnsupportedFormat"
+  },
+  "failureInvalidDesign": "Invalid design document",
+  "@failureInvalidDesign": {
+    "description": "failureInvalidDesign"
+  },
+  "failureDatabase": "Local database error",
+  "@failureDatabase": {
+    "description": "failureDatabase"
+  },
+  "failureExport": "Export failed",
+  "@failureExport": {
+    "description": "failureExport"
+  },
+  "failurePermissionDenied": "Permission denied",
+  "@failurePermissionDenied": {
+    "description": "failurePermissionDenied"
+  },
+  "failureCancelled": "Cancelled",
+  "@failureCancelled": {
+    "description": "failureCancelled"
+  },
+  "guideSteps": "1. Import a design (JSON / .mcstructure / .schem) — unsupported blocks are listed, the original file is never lost.\n2. Check the 3D preview, layers and floor plans; open Materials to see exact quantities.\n3. Export the design as MCAddon pack (or keep it in the library).\n4. On the phone: open the .mcaddon with Minecraft, activate both packs in the world settings (Beta APIs on).\n5. In game: use the S3D Menu item or chat commands starting with !s3d — preview the hologram, move/rotate/set height, toggle layers & rooms, then build manually or in batches after the confirmation prompt.",
+  "@guideSteps": {
+    "description": "guideSteps"
+  },
+  "guideLimitations": "• Android scoped storage prevents writing into Minecraft game folders — the app exports files you open/import manually.\n• Co-located (waterlogged) blocks in .mcstructure files are reported and skipped — v1 formats are single-block-per-cell.\n• Inventory checking in the add-on is only enforced where the Script API can read it; otherwise build proceeds and failures are reported per block.",
+  "@guideLimitations": {
+    "description": "guideLimitations"
+  },
+  "guideAddonCommands": "!s3d — open the add-on menu in chat\n!s3d build — start the batch build (asks confirmation first)\n!s3d pause / !s3d resume — pause or resume a running batch\n!s3d speed 32 — set blocks placed per tick (1–256)\n!s3d up / !s3d down — raise/lower the hologram",
+  "@guideAddonCommands": {
+    "description": "guideAddonCommands"
+  }
+}

@@ -1,0 +1,473 @@
+{
+  "@@locale": "ar",
+  "appTitle": "مخطط ثلاثي الأبعاد",
+  "@appTitle": {
+    "description": "appTitle"
+  },
+  "navLibrary": "المكتبة",
+  "@navLibrary": {
+    "description": "navLibrary"
+  },
+  "navImport": "استيراد",
+  "@navImport": {
+    "description": "navImport"
+  },
+  "navGuide": "الدليل",
+  "@navGuide": {
+    "description": "navGuide"
+  },
+  "navLog": "السجل",
+  "@navLog": {
+    "description": "navLog"
+  },
+  "navSettings": "الإعدادات",
+  "@navSettings": {
+    "description": "navSettings"
+  },
+  "searchHint": "ابحث في التصاميم…",
+  "@searchHint": {
+    "description": "searchHint"
+  },
+  "categoryAll": "الكل",
+  "@categoryAll": {
+    "description": "categoryAll"
+  },
+  "sortLabel": "ترتيب",
+  "@sortLabel": {
+    "description": "sortLabel"
+  },
+  "sortByName": "الاسم",
+  "@sortByName": {
+    "description": "sortByName"
+  },
+  "sortBySize": "الحجم",
+  "@sortBySize": {
+    "description": "sortBySize"
+  },
+  "sortByBlocks": "عدد البلوكات",
+  "@sortByBlocks": {
+    "description": "sortByBlocks"
+  },
+  "sortByDate": "التاريخ",
+  "@sortByDate": {
+    "description": "sortByDate"
+  },
+  "sortDescending": "ترتيب تنازلي",
+  "@sortDescending": {
+    "description": "sortDescending"
+  },
+  "emptyLibrary": "لا توجد تصاميم بعد",
+  "@emptyLibrary": {
+    "description": "emptyLibrary"
+  },
+  "emptyLibraryHint": "استخدم تبويب استيراد لتحميل ملفات json./mcstructure/.schem",
+  "@emptyLibraryHint": {
+    "description": "emptyLibraryHint"
+  },
+  "libraryCount": "{n} تصميم",
+  "@libraryCount": {
+    "description": "libraryCount",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryPalaces": "قصور",
+  "@categoryPalaces": {
+    "description": "categoryPalaces"
+  },
+  "categoryHouses": "منازل",
+  "@categoryHouses": {
+    "description": "categoryHouses"
+  },
+  "categoryTowers": "أبراج",
+  "@categoryTowers": {
+    "description": "categoryTowers"
+  },
+  "categoryBridges": "جسور",
+  "@categoryBridges": {
+    "description": "categoryBridges"
+  },
+  "categoryFarms": "مزارع",
+  "@categoryFarms": {
+    "description": "categoryFarms"
+  },
+  "categoryDecor": "ديكورات",
+  "@categoryDecor": {
+    "description": "categoryDecor"
+  },
+  "categoryIndustrial": "صناعي",
+  "@categoryIndustrial": {
+    "description": "categoryIndustrial"
+  },
+  "categoryOther": "أخرى",
+  "@categoryOther": {
+    "description": "categoryOther"
+  },
+  "detailTab3d": "ثلاثي الأبعاد",
+  "@detailTab3d": {
+    "description": "detailTab3d"
+  },
+  "detailTabPlan": "مخطط طوابق",
+  "@detailTabPlan": {
+    "description": "detailTabPlan"
+  },
+  "detailTabMaterials": "المواد",
+  "@detailTabMaterials": {
+    "description": "detailTabMaterials"
+  },
+  "detailTabInfo": "معلومات",
+  "@detailTabInfo": {
+    "description": "detailTabInfo"
+  },
+  "layersTitle": "الطبقات",
+  "@layersTitle": {
+    "description": "layersTitle"
+  },
+  "roomsTitle": "الغرف",
+  "@roomsTitle": {
+    "description": "roomsTitle"
+  },
+  "showAllLayers": "كل الطبقات",
+  "@showAllLayers": {
+    "description": "showAllLayers"
+  },
+  "resetView": "إعادة ضبط العرض",
+  "@resetView": {
+    "description": "resetView"
+  },
+  "dragRotateHint": "اسحب للتدوير · قرّص للتكبير · نقرة مزدوجة لإعادة الضبط",
+  "@dragRotateHint": {
+    "description": "dragRotateHint"
+  },
+  "sliceRange": "شريحة Y {lo}–{hi}",
+  "@sliceRange": {
+    "description": "sliceRange",
+    "placeholders": {
+      "hi": {
+        "type": "Object"
+      },
+      "lo": {
+        "type": "Object"
+      }
+    }
+  },
+  "moveSliceUp": "المستوى التالي",
+  "@moveSliceUp": {
+    "description": "moveSliceUp"
+  },
+  "moveSliceDown": "المستوى السابق",
+  "@moveSliceDown": {
+    "description": "moveSliceDown"
+  },
+  "totalBlocks": "إجمالي البلوكات",
+  "@totalBlocks": {
+    "description": "totalBlocks"
+  },
+  "distinctMaterials": "عدد المواد",
+  "@distinctMaterials": {
+    "description": "distinctMaterials"
+  },
+  "blockCount": "بلوك",
+  "@blockCount": {
+    "description": "blockCount"
+  },
+  "stacks": "مكدّس",
+  "@stacks": {
+    "description": "stacks"
+  },
+  "infoName": "الاسم",
+  "@infoName": {
+    "description": "infoName"
+  },
+  "infoDescription": "الوصف",
+  "@infoDescription": {
+    "description": "infoDescription"
+  },
+  "infoSource": "مستورد من",
+  "@infoSource": {
+    "description": "infoSource"
+  },
+  "infoDims": "الأبعاد",
+  "@infoDims": {
+    "description": "infoDims"
+  },
+  "infoPalette": "لوحة البلوكات",
+  "@infoPalette": {
+    "description": "infoPalette"
+  },
+  "infoDropped": "بلوكات محذوفة",
+  "@infoDropped": {
+    "description": "infoDropped"
+  },
+  "infoNotes": "ملاحظات التحويل",
+  "@infoNotes": {
+    "description": "infoNotes"
+  },
+  "renameAction": "إعادة تسمية",
+  "@renameAction": {
+    "description": "renameAction"
+  },
+  "moveCategory": "نقل إلى مجلد",
+  "@moveCategory": {
+    "description": "moveCategory"
+  },
+  "deleteAction": "حذف",
+  "@deleteAction": {
+    "description": "deleteAction"
+  },
+  "confirmDelete": "حذف التصميم؟",
+  "@confirmDelete": {
+    "description": "confirmDelete"
+  },
+  "confirmDeleteMsg": "سيُحذف التصميم وملفاته من التطبيق فقط.",
+  "@confirmDeleteMsg": {
+    "description": "confirmDeleteMsg"
+  },
+  "deleted": "تم الحذف",
+  "@deleted": {
+    "description": "deleted"
+  },
+  "importPick": "اختر ملفًا",
+  "@importPick": {
+    "description": "importPick"
+  },
+  "importPickHint": "المدعوم: JSON الخاص بالتطبيق، ‎.mcstructure (Bedrock)، ‎.schem (Sponge v2 / Litematica)، ‎.schematic",
+  "@importPickHint": {
+    "description": "importPickHint"
+  },
+  "importWorking": "جارٍ التحويل…",
+  "@importWorking": {
+    "description": "importWorking"
+  },
+  "importResultOk": "تم الاستيراد بنجاح",
+  "@importResultOk": {
+    "description": "importResultOk"
+  },
+  "importResultPartial": "تم الاستيراد مع تحذيرات",
+  "@importResultPartial": {
+    "description": "importResultPartial"
+  },
+  "importResultFailed": "فشل التحويل",
+  "@importResultFailed": {
+    "description": "importResultFailed"
+  },
+  "importFailKept": "تم الاحتفاظ بالملف الأصلي في تخزين التطبيق وتسجيله في السجل.",
+  "@importFailKept": {
+    "description": "importFailKept"
+  },
+  "errorsTitle": "أخطاء",
+  "@errorsTitle": {
+    "description": "errorsTitle"
+  },
+  "warningsTitle": "تحذيرات",
+  "@warningsTitle": {
+    "description": "warningsTitle"
+  },
+  "unsupportedTitle": "بلوكات غير مدعومة (حُذفت)",
+  "@unsupportedTitle": {
+    "description": "unsupportedTitle"
+  },
+  "unsupportedHint": "لا يوجد مقابل Bedrock لهذه البلوكات في هذا الإصدار، والتصميم صالح بدونها.",
+  "@unsupportedHint": {
+    "description": "unsupportedHint"
+  },
+  "noIssues": "لا توجد مشاكل",
+  "@noIssues": {
+    "description": "noIssues"
+  },
+  "saveToLibrary": "حفظ في المكتبة",
+  "@saveToLibrary": {
+    "description": "saveToLibrary"
+  },
+  "copy": "نسخ",
+  "@copy": {
+    "description": "copy"
+  },
+  "copied": "تم النسخ إلى الحافظة",
+  "@copied": {
+    "description": "copied"
+  },
+  "ok": "حسنًا",
+  "@ok": {
+    "description": "ok"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "cancel"
+  },
+  "close": "إغلاق",
+  "@close": {
+    "description": "close"
+  },
+  "exportJson": "تصدير JSON",
+  "@exportJson": {
+    "description": "exportJson"
+  },
+  "exportMcstructure": "تصدير ‎.mcstructure",
+  "@exportMcstructure": {
+    "description": "exportMcstructure"
+  },
+  "exportAddon": "تصدير كحزمة MCAddon",
+  "@exportAddon": {
+    "description": "exportAddon"
+  },
+  "exportAddonBuilding": "جارٍ بناء الحزمة…",
+  "@exportAddonBuilding": {
+    "description": "exportAddonBuilding"
+  },
+  "exportAddonShareHint": "افتح الملف المشارك بميانكرفت (أو انسخه لجهازك) ثم فعّل الحزمتين في عالمك.",
+  "@exportAddonShareHint": {
+    "description": "exportAddonShareHint"
+  },
+  "promptFab": "نسخ برومبت الذكاء الاصطناعي",
+  "@promptFab": {
+    "description": "promptFab"
+  },
+  "promptSheetTitle": "برومبت للذكاء الاصطناعي الخارجي",
+  "@promptSheetTitle": {
+    "description": "promptSheetTitle"
+  },
+  "promptIncludeCurrent": "تضمين JSON التصميم الحالي",
+  "@promptIncludeCurrent": {
+    "description": "promptIncludeCurrent"
+  },
+  "promptExtraNotesHint": "ملاحظات إضافية (اختياري)",
+  "@promptExtraNotesHint": {
+    "description": "promptExtraNotesHint"
+  },
+  "promptCopied": "تم نسخ البرومبت — الصقه في ChatGPT / Claude / Gemini",
+  "@promptCopied": {
+    "description": "promptCopied"
+  },
+  "promptOfflineNote": "لا يحتوي التطبيق على ذكاء اصطناعي مدمج ولا اتصالات شبكة؛ ينسخ النص فقط.",
+  "@promptOfflineNote": {
+    "description": "promptOfflineNote"
+  },
+  "logStatusSuccess": "نجاح",
+  "@logStatusSuccess": {
+    "description": "logStatusSuccess"
+  },
+  "logStatusPartial": "مع تحذيرات",
+  "@logStatusPartial": {
+    "description": "logStatusPartial"
+  },
+  "logStatusFailed": "فشل",
+  "@logStatusFailed": {
+    "description": "logStatusFailed"
+  },
+  "logColFile": "الملف",
+  "@logColFile": {
+    "description": "logColFile"
+  },
+  "logColStatus": "الحالة",
+  "@logColStatus": {
+    "description": "logColStatus"
+  },
+  "logOpenDesign": "فتح التصميم",
+  "@logOpenDesign": {
+    "description": "logOpenDesign"
+  },
+  "logClear": "تفريغ السجل",
+  "@logClear": {
+    "description": "logClear"
+  },
+  "logCleared": "تم تفريغ السجل",
+  "@logCleared": {
+    "description": "logCleared"
+  },
+  "logUnsupportedN": "{n} نوع بلوك غير مدعوم",
+  "@logUnsupportedN": {
+    "description": "logUnsupportedN",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsLanguage": "اللغة",
+  "@settingsLanguage": {
+    "description": "settingsLanguage"
+  },
+  "languageSystem": "لغة النظام",
+  "@languageSystem": {
+    "description": "languageSystem"
+  },
+  "settingsDefaultView": "العارض الافتراضي",
+  "@settingsDefaultView": {
+    "description": "settingsDefaultView"
+  },
+  "settingsBatchSpeed": "سرعة البناء الجماعي الافتراضية",
+  "@settingsBatchSpeed": {
+    "description": "settingsBatchSpeed"
+  },
+  "settingsBatchSpeedHint": "بلوك لكل tick — يُلغِي المؤثر داخل اللعبة هذا القيمة لكل جلسة.",
+  "@settingsBatchSpeedHint": {
+    "description": "settingsBatchSpeedHint"
+  },
+  "settingsAbout": "حول",
+  "@settingsAbout": {
+    "description": "settingsAbout"
+  },
+  "settingsAboutText": "مخطط ثلاثي الأبعاد v1.0.0 — يعمل دون اتصال بالكامل. الهدف: Minecraft Bedrock 26.40.5 مع إضافة Schematic 3D Builder المرفقة.",
+  "@settingsAboutText": {
+    "description": "settingsAboutText"
+  },
+  "settingsConfirmTitle": "تأكيد قبل البناء",
+  "@settingsConfirmTitle": {
+    "description": "settingsConfirmTitle"
+  },
+  "settingsConfirmAlways": "مطلوب دائمًا ( للسلامة)",
+  "@settingsConfirmAlways": {
+    "description": "settingsConfirmAlways"
+  },
+  "guideAddonTitle": "تركيب الإضافة",
+  "@guideAddonTitle": {
+    "description": "guideAddonTitle"
+  },
+  "guideBuildFlow": "مسار البناء",
+  "@guideBuildFlow": {
+    "description": "guideBuildFlow"
+  },
+  "failureFileUnreadable": "تعذّرت قراءة الملف",
+  "@failureFileUnreadable": {
+    "description": "failureFileUnreadable"
+  },
+  "failureUnsupportedFormat": "صيغة ملف غير مدعومة",
+  "@failureUnsupportedFormat": {
+    "description": "failureUnsupportedFormat"
+  },
+  "failureInvalidDesign": "مستند تصميم غير صالح",
+  "@failureInvalidDesign": {
+    "description": "failureInvalidDesign"
+  },
+  "failureDatabase": "خطأ في قاعدة البيانات المحلية",
+  "@failureDatabase": {
+    "description": "failureDatabase"
+  },
+  "failureExport": "فشل التصدير",
+  "@failureExport": {
+    "description": "failureExport"
+  },
+  "failurePermissionDenied": "الإذن مرفوض",
+  "@failurePermissionDenied": {
+    "description": "failurePermissionDenied"
+  },
+  "failureCancelled": "تم الإلغاء",
+  "@failureCancelled": {
+    "description": "failureCancelled"
+  },
+  "guideSteps": "1. استورد تصميمًا (JSON / ‎.mcstructure‎ / ‎.schem‎) — تُعرض البلوكات غير المدعومة ولا يضيع الملف الأصلي أبدًا.\n2. راجع المعاينة ثلاثية الأبعاد والطبقات والمخططات، وافتح المواد لمعرفة الكميات الدقيقة.\n3. صدّر التصميم كحزمة MCAddon (أو احتفظ به في المكتبة).\n4. على الهاتف: افتح ملف ‎.mcaddon‎ مع ماينكرافت وفعّل الحزمتين في إعدادات العالم (Beta APIs مفعّلة).\n5. داخل اللعبة: استخدم عنصر قائمة S3D أو أوامر الدردشة التي تبدأ بـ !s3d — عاين الهولوجرام، حرّك/أدِر/ارفع، بدّل الطبقات والغرف، ثم ابنِ يدويًا أو جماعيًا بعد رسالة التأكيد.",
+  "@guideSteps": {
+    "description": "guideSteps"
+  },
+  "guideLimitations": "• تخزين Android المقيّد يمنع الكتابة في مجلدات لعبة ماينكرافت — يصدّر التطبيق ملفات تفتحها/تستوردها يدويًا.\n• البلوكات المتداخلة (waterlogged) في ملفات ‎.mcstructure‎ تُبلَّغ ويُتجاهلها — صيغة v1 كتلة واحدة لكل خلية.\n• فحص الحقائب داخل الإضافة يُطبَّق فقط حيث تتيح واجهة السكربت قراءتها؛ وإلا تستمر العملية وتُسجَّل الإخفاقات لكل بلوك.",
+  "@guideLimitations": {
+    "description": "guideLimitations"
+  },
+  "guideAddonCommands": "!s3d — فتح قائمة الإضافة في الدردشة\n!s3d build — بدء البناء الجماعي (يطلب تأكيدًا أولًا)\n!s3d pause / !s3d resume — إيقاف مؤقت أو استئناف الدفعة\n!s3d speed 32 — عدد البلوكات لكل tick (1–256)\n!s3d up / !s3d down — رفع/خفض الهولوجرام",
+  "@guideAddonCommands": {
+    "description": "guideAddonCommands"
+  }
+}

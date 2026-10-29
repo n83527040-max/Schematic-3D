@@ -1,0 +1,3 @@
+pack.name=Schematic 3D Builder
+pack.description=Guided schematic building for Bedrock 26.40+
+item.s3d:menu.name=Schematic 3D Menu

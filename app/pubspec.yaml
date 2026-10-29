@@ -1,0 +1,54 @@
+name: schematic_3d
+description: >-
+  Schematic 3D — local-first library for Minecraft designs with a built-in
+  converter, 3D preview, floor plans, materials and an export path to a
+  Bedrock add-on (Schematic 3D Builder). No AI, no cloud: the round button
+  copies a design prompt to the clipboard only.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_riverpod: ^2.5.1   # documented state management (spec: Riverpod/Bloc)
+  sqflite: ^2.3.3           # local database with migrations + indexes
+  path_provider: ^2.1.4     # app-scoped storage (scoped storage compliant)
+  file_picker: ^8.1.3       # SAF-backed picker, no broad permissions
+  share_plus: ^10.0.2       # export / open-with flow for MCAddon files
+  shared_preferences: ^2.3.2 # small settings (language, flags)
+  intl: any                  # locale-aware formatting (pinned by SDK)
+  path: ^1.9.0               # file-path handling
+  archive: ^3.6.1            # zip container for .mcaddon export (pure dart)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  sqflite_common_ffi: ^2.3.3 # run DB unit tests on host VM
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/prompts/
+    - assets/examples/
+    - assets/generated/
+    - assets/addon_template/bp/
+    - assets/addon_template/rp/
+    - assets/addon_template/bp/scripts/s3d/
+    - assets/addon_template/bp/scripts/s3d/core/
+    - assets/addon_template/bp/scripts/s3d/ui/
+    - assets/addon_template/bp/scripts/s3d/data/
+    - assets/addon_template/bp/blocks/
+    - assets/addon_template/bp/items/
+    - assets/addon_template/rp/texts/
+    - assets/addon_template/rp/textures/
+    - assets/addon_template/rp/textures/blocks/
+    - assets/addon_template/rp/textures/items/

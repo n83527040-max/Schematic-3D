@@ -38,6 +38,7 @@ jobs:
             flutter create --platforms=android --org com.nova.schematic3d \
               --project-name schematic_3d .
           fi
+
       - name: Build release APK
         run: |
           cd app
@@ -48,16 +49,7 @@ jobs:
         shell: bash {0}
         run: |
           set +e
-          { echo "## publish diagnostics ($(date))";
-            echo "- ref=$GITHUB_REF sha=$GITHUB_SHA";
-            echo "- gh=$(gh --version 2>&1 | head -1)";
-            echo "- apk exists: $(ls -la app/build/app/outputs/flutter-apk/ 2>&1 | tr '\n' ' ')";
-            echo "- dist: $(ls -la dist/ 2>&1 | tr '\n' ' ')"; } > /tmp/pubdiag.md
-          if cp app/build/app/outputs/flutter-apk/app-release.apk /tmp/app-release.apk; then
-            echo "- cp: OK ($(stat -c%s /tmp/app-release.apk) bytes)" >> /tmp/pubdiag.md
-          else
-            echo "- cp: FAILED" >> /tmp/pubdiag.md
-          fi
+          cp app/build/app/outputs/flutter-apk/app-release.apk /tmp/app-release.apk
           cat > /tmp/notes.md <<'NOTES'
           ## إصدار تجريبي مبني آليًا من CI (flutter 3.24.5، JDK 17)
 
@@ -70,29 +62,27 @@ jobs:
 
           Requirements: import the .mcaddon into Bedrock 1.26.40+; the APK is a debug-signed test build.
           NOTES
-          gh release create "${GITHUB_REF_NAME}" \
-            /tmp/app-release.apk \
-            dist/Schematic3DBuilder.mcaddon \
-            dist/Schematic3DBuilder-base.mcaddon \
-            --title "Schematic 3D ${GITHUB_REF_NAME}" \
-            --notes-file /tmp/notes.md \
-            --repo "$GITHUB_REPOSITORY" > /tmp/pubout.txt 2>&1; rc=$?
-          echo "- gh exit=$rc output:" >> /tmp/pubdiag.md
-          sed 's/^/    /' /tmp/pubout.txt >> /tmp/pubdiag.md
-          cat /tmp/pubdiag.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null
-          # also mirror into commit comment (fetchable via api.github.com)
-          echo "## release publish (v0.1.0 attempt)" > /tmp/body.md
-          sed 's/^/    /' /tmp/pubdiag.md >> /tmp/body.md
-          python3 - <<'PYEOF2'
-import json,os,urllib.request
-body=open('/tmp/body.md').read()[:60000]
-req=urllib.request.Request(
-  f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/commits/{os.environ['GITHUB_SHA']}/comments",
-  data=json.dumps({'body':body}).encode(),
-  headers={'Authorization':'token '+os.environ['GITHUB_TOKEN'],
-           'Accept':'application/vnd.github+json'}, method='POST')
-try:
-    with urllib.request.urlopen(req) as r: print('comment posted', r.status)
-except Exception as e: print('comment failed', e)
-PYEOF2
+          {
+            echo "## publish diagnostics $(date -u +%H:%M:%S)"
+            echo "- ref=$GITHUB_REF_NAME sha=$GITHUB_SHA"
+            echo "- gh=$(gh --version 2>&1 | head -1)"
+            echo "- apk: $(ls -la /tmp/app-release.apk 2>&1)"
+            echo "- dist: $(ls dist/ 2>&1 | tr '\n' ' ')"
+            gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 \
+              && echo "- release already exists (pre-run leftover)" \
+              || echo "- release does not exist yet"
+            gh release create "$GITHUB_REF_NAME" \
+              /tmp/app-release.apk \
+              dist/Schematic3DBuilder.mcaddon \
+              dist/Schematic3DBuilder-base.mcaddon \
+              --title "Schematic 3D $GITHUB_REF_NAME" \
+              --notes-file /tmp/notes.md \
+              --repo "$GITHUB_REPOSITORY" 2>&1 | sed 's/^/    > /'
+            echo "- gh exit=$?"
+          } > /tmp/pubdiag.txt 2>&1
+          rc=${PIPESTATUS[0]}
+          cat /tmp/pubdiag.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null
+          python3 scripts/post_commit_comment.py "$GITHUB_SHA" /tmp/pubdiag.txt
+          gh release view "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || rc=1
           exit "$rc"

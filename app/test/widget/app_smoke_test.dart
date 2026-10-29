@@ -16,6 +16,16 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import '../helpers.dart';
 
 /// End-to-end wiring WITHOUT the asset bundle: DB + repos + screens.
+
+/// Advance frames until the library spinner resolves. DB calls need the
+/// real clock, so every test body runs inside tester.runAsync.
+Future<void> settle(WidgetTester t) async {
+  for (var i = 0; i < 120; i++) {
+    await t.pump(const Duration(milliseconds: 25));
+    if (t.widgetList(find.byType(CircularProgressIndicator)).isEmpty) break;
+  }
+}
+
 void main() {
   late Directory tmp;
   late AppDatabase db;
@@ -48,20 +58,24 @@ void main() {
       );
 
   testWidgets('library renders empty state in English', (tester) async {
+    await tester.runAsync(() async {
     await tester.pumpWidget(app('en'));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('Schematic 3D'), findsOneWidget);
     expect(find.text('No designs yet'), findsOneWidget);
     expect(find.byIcon(Icons.auto_awesome), findsOneWidget); // prompt FAB
     expect(find.text('Import'), findsWidgets);
+    });
   });
 
   testWidgets('Arabic renders RTL and localized labels', (tester) async {
+    await tester.runAsync(() async {
     await tester.pumpWidget(app('ar'));
-    await tester.pumpAndSettle();
+    await settle(tester);
     final ctx = tester.element(find.text('مخطط ثلاثي الأبعاد'));
     expect(Directionality.of(ctx), TextDirection.rtl);
     expect(find.text('لا توجد تصاميم بعد'), findsOneWidget);
+    });
   });
 
   testWidgets('library lists an imported design after refresh',
@@ -71,8 +85,9 @@ void main() {
     // build via repo directly (importer needs catalog asset in app flow;
     // the design JSON here is already bedrock-mapped examples content)
     final repo = DesignRepository(db, tmp);
+    await tester.runAsync(() async {
     await tester.pumpWidget(app('en'));
-    await tester.pumpAndSettle();
+    await settle(tester);
 
     final container =
         ProviderScope.containerOf(tester.element(find.text('Schematic 3D')));
@@ -81,17 +96,20 @@ void main() {
     await repo.create(
         design: report.design!, sourceFormat: 'schematic3dJson');
     await container.read(libraryProvider.notifier).refresh();
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.textContaining('Tower'), findsWidgets);
+    });
   });
 
   testWidgets('settings: language switch chips visible', (tester) async {
+    await tester.runAsync(() async {
     await tester.pumpWidget(app('en'));
-    await tester.pumpAndSettle();
+    await settle(tester);
     await tester.tap(find.text('Settings'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 350));
     expect(find.text('Language'), findsOneWidget);
     expect(find.text('System'), findsOneWidget);
     expect(find.textContaining('Always required'), findsOneWidget);
+    });
   });
 }

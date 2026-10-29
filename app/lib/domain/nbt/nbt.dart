@@ -173,6 +173,8 @@ class _Reader {
         final n = _i32();
         _checkLen(n, 8);
         return List<int>.generate(n, (_) => _i64(), growable: false);
+      case tagCompound:
+        return readCompound(depth);
       default:
         throw NbtException('unknown tag type $tt');
     }

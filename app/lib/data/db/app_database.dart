@@ -28,6 +28,7 @@ class AppDatabase {
           CREATE TABLE designs(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
+            kind TEXT NOT NULL DEFAULT 'design',
             category_key TEXT,
             json TEXT NOT NULL,
             source_format TEXT,

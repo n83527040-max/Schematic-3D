@@ -18,9 +18,11 @@ class BlockCatalog implements BlockCatalogIface {
   final Set<String> known;
 
   /// java short name (no namespace) → bedrock full id
+  @override
   final Map<String, String> javaToBedrock;
 
   /// family block (planks/log/leaves/wool/…) → variant → bedrock full id
+  @override
   final Map<String, Map<String, String>> javaFamily;
 
   /// numeric wood_type for `log` family (java metadata era) fallback

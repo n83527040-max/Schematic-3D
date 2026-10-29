@@ -186,6 +186,30 @@ KNOWN_BEDROCK_IDS: frozenset[str] = frozenset(
 )
 
 
+# Modern Bedrock (1.21+) ships per-wood block ids; the exporter targets
+# these, so the known-id table must accept them (fixes spurious
+# palette.id.unknown warnings in the app + converter).
+_WOODS_ALL = _WOODS + ["mangrove", "cherry", "crimson", "warped", "bamboo"]
+_KNOWN_EXTRA: set[str] = set()
+for _w in _WOODS_ALL:
+    for _suf in ("planks", "stairs", "slab", "fence", "fence_gate", "door",
+                 "trapdoor", "button", "pressure_plate", "sign",
+                 "hanging_sign"):
+        _KNOWN_EXTRA.add(f"{_w}_{_suf}")
+for _w in [x for x in _WOODS_ALL
+           if x not in ("crimson", "warped", "bamboo")]:
+    for _suf in ("log", "leaves", "wood"):
+        _KNOWN_EXTRA.add(f"{_w}_{_suf}")
+    _KNOWN_EXTRA.add(f"stripped_{_w}_log")
+    _KNOWN_EXTRA.add(f"stripped_{_w}_wood")
+for _w in ("crimson", "warped"):
+    for _suf in ("stem", "hyphae", "wart_block"):
+        _KNOWN_EXTRA.add(f"{_w}_{_suf}")
+_KNOWN_EXTRA |= {"bamboo_block", "bamboo_mosaic", "bamboo_planks",
+                 "stripped_bamboo_block"}
+KNOWN_BEDROCK_IDS = KNOWN_BEDROCK_IDS | frozenset(_KNOWN_EXTRA)
+
+
 KNOWN_BEDROCK_FULL = frozenset(f"minecraft:{x}" for x in KNOWN_BEDROCK_IDS) | \
     frozenset(x for x in KNOWN_BEDROCK_IDS if ":" in x)
 

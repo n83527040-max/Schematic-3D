@@ -55,7 +55,9 @@ void main() {
   });
 
   group('full importer', () {
-    final imp = DesignImporter();
+    // constructed lazily so it sees the catalog adopted in setUpAll
+    DesignImporter? cached;
+    DesignImporter get imp => cached ??= DesignImporter();
 
     test('json example imports clean', () {
       final bytes = Uint8List.fromList(

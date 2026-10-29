@@ -115,6 +115,7 @@ class DesignRepository {
         .convert(exportWithFormat(design));
     final id = await db.insert('designs', {
       'name': design.name,
+      'kind': 'design',
       'category_key': categoryKey,
       'json': jsonStr,
       'source_format': sourceFormat,
@@ -169,6 +170,7 @@ class DesignRepository {
     final now = DateTime.now().millisecondsSinceEpoch;
     final id = await db.insert('designs', {
       'name': '[FAILED] $fileName',
+      'kind': 'failed_import',
       'category_key': null,
       'json': jsonEncode({
         'format': kSchematicFormat,
@@ -197,7 +199,7 @@ class DesignRepository {
   }
 
   Future<List<DesignRow>> query(DesignQuery q) async {
-    final where = <String>[];
+    final where = <String>["kind = 'design'"];
     final args = <Object?>[];
     if (q.search != null && q.search!.trim().isNotEmpty) {
       where.add('name LIKE ?');
@@ -226,7 +228,8 @@ class DesignRepository {
   }
 
   Future<DesignRow?> byId(int id) async {
-    final rows = await db.query('designs', where: 'id = ?', whereArgs: [id], limit: 1);
+    final rows = await db.query('designs',
+        where: "id = ? AND kind = 'design'", whereArgs: [id], limit: 1);
     if (rows.isEmpty) return null;
     return DesignRow.fromMap(rows.first);
   }
@@ -307,7 +310,8 @@ class DesignRepository {
   }
 
   Future<int> countAll() async {
-    final r = await db.rawQuery('SELECT COUNT(*) c FROM designs');
+    final r = await db
+        .rawQuery("SELECT COUNT(*) c FROM designs WHERE kind = 'design'");
     return Sqflite.firstIntValue(r) ?? 0;
   }
 }

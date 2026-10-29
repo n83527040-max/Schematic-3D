@@ -46,7 +46,17 @@ jobs:
 
       - name: Publish GitHub Release with direct-download assets
         run: |
-          cp app/build/app/outputs/flutter-apk/app-release.apk /tmp/app-release.apk
+          set -o pipefail
+          { echo "## publish diagnostics ($(date))";
+            echo "- ref=$GITHUB_REF sha=$GITHUB_SHA";
+            echo "- gh=$(gh --version 2>&1 | head -1)";
+            echo "- apk exists: $(ls -la app/build/app/outputs/flutter-apk/ 2>&1 | tr '\n' ' ')";
+            echo "- dist: $(ls -la dist/ 2>&1 | tr '\n' ' ')"; } > /tmp/pubdiag.md
+          if cp app/build/app/outputs/flutter-apk/app-release.apk /tmp/app-release.apk; then
+            echo "- cp: OK ($(stat -c%s /tmp/app-release.apk) bytes)" >> /tmp/pubdiag.md
+          else
+            echo "- cp: FAILED" >> /tmp/pubdiag.md
+          fi
           cat > /tmp/notes.md <<'NOTES'
           ## إصدار تجريبي مبني آليًا من CI (flutter 3.24.5، JDK 17)
 
@@ -65,4 +75,11 @@ jobs:
             dist/Schematic3DBuilder-base.mcaddon \
             --title "Schematic 3D ${GITHUB_REF_NAME}" \
             --notes-file /tmp/notes.md \
-            --repo "$GITHUB_REPOSITORY"
+            --repo "$GITHUB_REPOSITORY" 2>&1 | tee /tmp/pubout.txt; rc=${PIPESTATUS[0]}
+          echo "- gh exit=$rc output:" >> /tmp/pubdiag.md
+          sed 's/^/    /' /tmp/pubout.txt >> /tmp/pubdiag.md
+          if [ "$rc" != "0" ]; then
+            cat /tmp/pubdiag.md >> "$GITHUB_STEP_SUMMARY"
+            exit "$rc"
+          fi
+          echo "- release created ✓" >> /tmp/pubdiag.md

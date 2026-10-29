@@ -31,6 +31,13 @@ jobs:
           flutter pub get
           flutter gen-l10n
 
+      - name: Android scaffolding (generated if absent)
+        run: |
+          cd app
+          if [ ! -d android ]; then
+            flutter create --platforms=android --org com.nova.schematic3d \
+              --project-name schematic_3d .
+          fi
       - name: Build release APK
         run: |
           cd app

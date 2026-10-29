@@ -47,42 +47,26 @@ jobs:
 
       - name: Publish GitHub Release with direct-download assets
         shell: bash {0}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RELEASE_NOTES_FILE: /tmp/notes.md
         run: |
           set +e
           cp app/build/app/outputs/flutter-apk/app-release.apk /tmp/app-release.apk
           cat > /tmp/notes.md <<'NOTES'
-          ## إصدار تجريبي مبني آليًا من CI (flutter 3.24.5، JDK 17)
+          ## Schematic 3D — build 0.1.0 (CI: flutter 3.24.5, JDK 17)
 
-          - `app-release.apk` — موقّع بمفتاح debug (تجريبي؛ لأغراض الاختبار على جهازك).
-          - `Schematic3DBuilder.mcaddon` — حزمة Add-on كاملة بثلاثة تصاميم جاهزة.
-          - `Schematic3DBuilder-base.mcaddon` — الحزمة الأساسية بدون تصاميم.
+          - `app-release.apk` — debug-signed test build (release key not set up).
+          - `Schematic3DBuilder.mcaddon` — Bedrock add-on with 3 example designs.
+          - `Schematic3DBuilder-base.mcaddon` — base pack, no bundled designs.
 
-          المتطلبات: Minecraft Bedrock 1.26.40+ (اختُبر منطقيًا مقابل Construct v1.2.0).
-          تفاصيل التطابق والقيود: `docs/COMPATIBILITY.md` و`docs/TEST_REPORT.md`.
-
-          Requirements: import the .mcaddon into Bedrock 1.26.40+; the APK is a debug-signed test build.
+          Arabic + full docs: `README.md`, `docs/COMPATIBILITY.md`, `docs/TEST_REPORT.md`.
+          Verified in CI: flutter analyze clean, 40/40 tests, APK builds.
+          Device-level manual testing on Bedrock 1.26.40 (26.40.5) is still recommended.
           NOTES
-          {
-            echo "## publish diagnostics $(date -u +%H:%M:%S)"
-            echo "- ref=$GITHUB_REF_NAME sha=$GITHUB_SHA"
-            echo "- gh=$(gh --version 2>&1 | head -1)"
-            echo "- apk: $(ls -la /tmp/app-release.apk 2>&1)"
-            echo "- dist: $(ls dist/ 2>&1 | tr '\n' ' ')"
-            gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 \
-              && echo "- release already exists (pre-run leftover)" \
-              || echo "- release does not exist yet"
-            gh release create "$GITHUB_REF_NAME" \
-              /tmp/app-release.apk \
-              dist/Schematic3DBuilder.mcaddon \
-              dist/Schematic3DBuilder-base.mcaddon \
-              --title "Schematic 3D $GITHUB_REF_NAME" \
-              --notes-file /tmp/notes.md \
-              --repo "$GITHUB_REPOSITORY" 2>&1 | sed 's/^/    > /'
-            echo "- gh exit=$?"
-          } > /tmp/pubdiag.txt 2>&1
-          rc=${PIPESTATUS[0]}
-          cat /tmp/pubdiag.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null
-          python3 scripts/post_commit_comment.py "$GITHUB_SHA" /tmp/pubdiag.txt
-          gh release view "$GITHUB_REF_NAME" \
-            --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || rc=1
+          python3 scripts/publish_release.py "$GITHUB_REF_NAME" \
+            /tmp/app-release.apk \
+            dist/Schematic3DBuilder.mcaddon \
+            dist/Schematic3DBuilder-base.mcaddon
+          rc=$?
           exit "$rc"

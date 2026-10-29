@@ -45,8 +45,9 @@ jobs:
           flutter build apk --release 2>&1 | tail -n 60
 
       - name: Publish GitHub Release with direct-download assets
+        shell: bash {0}
         run: |
-          set -o pipefail
+          set +e
           { echo "## publish diagnostics ($(date))";
             echo "- ref=$GITHUB_REF sha=$GITHUB_SHA";
             echo "- gh=$(gh --version 2>&1 | head -1)";
@@ -75,11 +76,23 @@ jobs:
             dist/Schematic3DBuilder-base.mcaddon \
             --title "Schematic 3D ${GITHUB_REF_NAME}" \
             --notes-file /tmp/notes.md \
-            --repo "$GITHUB_REPOSITORY" 2>&1 | tee /tmp/pubout.txt; rc=${PIPESTATUS[0]}
+            --repo "$GITHUB_REPOSITORY" > /tmp/pubout.txt 2>&1; rc=$?
           echo "- gh exit=$rc output:" >> /tmp/pubdiag.md
           sed 's/^/    /' /tmp/pubout.txt >> /tmp/pubdiag.md
-          if [ "$rc" != "0" ]; then
-            cat /tmp/pubdiag.md >> "$GITHUB_STEP_SUMMARY"
-            exit "$rc"
-          fi
-          echo "- release created ✓" >> /tmp/pubdiag.md
+          cat /tmp/pubdiag.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null
+          # also mirror into commit comment (fetchable via api.github.com)
+          echo "## release publish (v0.1.0 attempt)" > /tmp/body.md
+          sed 's/^/    /' /tmp/pubdiag.md >> /tmp/body.md
+          python3 - <<'PYEOF2'
+import json,os,urllib.request
+body=open('/tmp/body.md').read()[:60000]
+req=urllib.request.Request(
+  f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/commits/{os.environ['GITHUB_SHA']}/comments",
+  data=json.dumps({'body':body}).encode(),
+  headers={'Authorization':'token '+os.environ['GITHUB_TOKEN'],
+           'Accept':'application/vnd.github+json'}, method='POST')
+try:
+    with urllib.request.urlopen(req) as r: print('comment posted', r.status)
+except Exception as e: print('comment failed', e)
+PYEOF2
+          exit "$rc"

@@ -80,12 +80,6 @@ jobs:
           cd app
           set -o pipefail
           flutter test --reporter expanded 2>&1 | tee /tmp/flutter-test.log
-      - name: Publish diagnostics (commit comment, fallback ci-logs branch)
-        if: always()
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash scripts/post_logs_comment.sh
-
       - name: Android scaffolding (generated if absent)
         run: |
           cd app
@@ -94,8 +88,18 @@ jobs:
               --project-name schematic_3d .
           fi
       - name: Build release APK
-        run: cd app && flutter build apk --release
+        run: |
+          cd app
+          set -o pipefail
+          flutter build apk --release 2>&1 | tail -n 400 | tee /tmp/apk.log
+      - name: Publish diagnostics (commit comment, fallback ci-logs branch)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/post_logs_comment.sh
+
       - uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: apk-release
           path: app/build/app/outputs/flutter-apk/app-release.apk

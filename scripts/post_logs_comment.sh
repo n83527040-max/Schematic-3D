@@ -10,6 +10,7 @@ OUT=/tmp/combined.md
   echo "## gen-l10n (tail)";            tail -n 40 /tmp/genl10n.log 2>/dev/null
   echo "## flutter analyze (tail)";     tail -n 150 /tmp/analyze.log 2>/dev/null
   echo "## flutter test (tail)";        tail -n 1500 /tmp/flutter-test.log 2>/dev/null
+  echo "## flutter build apk (tail)";   tail -n 220 /tmp/apk.log 2>/dev/null
 } > "$OUT"
 
 python3 - "$OUT" <<'PYEOF'
@@ -45,7 +46,7 @@ if "created_at" not in r.stdout:
     ]
     dst = os.path.join(work, "logs")
     os.makedirs(dst, exist_ok=True)
-    for f in ("pubget.log", "genl10n.log", "analyze.log", "flutter-test.log"):
+    for f in ("pubget.log", "genl10n.log", "analyze.log", "flutter-test.log", "apk.log"):
         src = f"/tmp/{f}"
         if os.path.exists(src):
             shutil.copy(src, os.path.join(dst, f))

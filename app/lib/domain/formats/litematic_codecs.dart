@@ -25,7 +25,9 @@ class LitematicCodecs {
     final body = doc.root['Schematic'] is Map
         ? doc.root['Schematic'] as Map
         : doc.root;
-    if (body['Version'] == 2 && body['BlockData'] != null) {
+    final verRaw = body['Version'];
+    final ver = verRaw is NbtInt ? verRaw.value : verRaw;
+    if (ver == 2 && body['BlockData'] != null) {
       return _parseSponge2(Map<String, Object?>.from(body), rep,
           sourceName: sourceName);
     }

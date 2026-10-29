@@ -71,8 +71,13 @@ void main() {
       expect(d2.dimensions, design.dimensions);
       expect(d2.blocks.length, design.blocks.length);
       // block positions identical (sort by key)
-      final a = [for (final b in design.blocks) b.key]..sort();
-      final b2 = [for (final b in d2.blocks) b.key]..sort();
+      int cmp((int, int, int) x, (int, int, int) y) => x.$1 != y.$1
+          ? x.$1.compareTo(y.$1)
+          : x.$2 != y.$2
+              ? x.$2.compareTo(y.$2)
+              : x.$3.compareTo(y.$3);
+      final a = [for (final b in design.blocks) b.key]..sort(cmp);
+      final b2 = [for (final b in d2.blocks) b.key]..sort(cmp);
       expect(b2, a);
     });
 

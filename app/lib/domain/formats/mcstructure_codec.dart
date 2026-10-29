@@ -49,8 +49,8 @@ class McstructureCodec {
       rep.error('mcstructure.indices', 'block_indices must contain two lists');
       return (design: null, report: rep);
     }
-    final primary = (bi.items[0] as List).cast<Object?>();
-    final secondary = (bi.items[1] as List).cast<Object?>();
+    final primary = _asItems(bi.items[0]);
+    final secondary = _asItems(bi.items[1]);
     final n = sx * sy * sz;
     if (primary.length != n || secondary.length != n) {
       rep.error('mcstructure.indices',
@@ -99,16 +99,16 @@ class McstructureCodec {
 
     final blocks = <BlockEntry>[];
     for (var idx = 0; idx < n; idx++) {
-      final pi = primary[idx];
-      if (pi is! int || pi < 0 || pi >= entries.length) continue;
+      final pi = _intOf(primary[idx]);
+      if (pi == null || pi < 0 || pi >= entries.length) continue;
       final entry = entries[pi];
       if (entry.id == 'minecraft:air') continue;
       final z = idx % sz;
       final y = (idx ~/ sz) % sy;
       final x = idx ~/ (sz * sy);
       blocks.add(BlockEntry(x, y, z, pi));
-      final si = secondary[idx];
-      if (si is int && si >= 0 && si < entries.length) {
+      final si = _intOf(secondary[idx]);
+      if (si != null && si >= 0 && si < entries.length) {
         rep.warning('mcstructure.colocated',
             'co-located block at ($x,$y,$z) ignored '
             '(${entries[si].id}); not representable in schematic3d-build v1');
@@ -130,6 +130,21 @@ class McstructureCodec {
       metadata: const {'source': 'mcstructure', 'generator': 'schematic3d-app'},
     );
     return (design: design, report: rep);
+  }
+
+  static List<Object?> _asItems(Object? v) {
+    if (v is NbtList) return v.items;
+    if (v is List) return v.cast<Object?>();
+    return const [];
+  }
+
+  static int? _intOf(Object? v) {
+    if (v is NbtInt) return v.value;
+    if (v is NbtShort) return v.value;
+    if (v is NbtByte) return v.value;
+    if (v is NbtLong) return v.value;
+    if (v is int) return v;
+    return null;
   }
 
   /// Build the NBT compound for a .mcstructure file.

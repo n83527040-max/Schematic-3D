@@ -68,9 +68,24 @@ jobs:
       - name: Regenerate localizations
         run: cd app && flutter gen-l10n
       - name: Analyze
-        run: cd app && flutter analyze --no-fatal-infos
+        run: |
+          cd app
+          set -o pipefail
+          flutter analyze --no-fatal-infos 2>&1 | tee /tmp/analyze.log
       - name: Tests (pure domain + DB via ffi; no device needed)
-        run: cd app && flutter test
+        run: |
+          cd app
+          set -o pipefail
+          flutter test --reporter expanded 2>&1 | tee /tmp/flutter-test.log
+      - name: Upload step logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-logs
+          path: |
+            /tmp/analyze.log
+            /tmp/flutter-test.log
+          if-no-files-found: ignore
       - name: Android scaffolding (generated if absent)
         run: |
           cd app

@@ -80,31 +80,12 @@ jobs:
           cd app
           set -o pipefail
           flutter test --reporter expanded 2>&1 | tee /tmp/flutter-test.log
-      - name: Publish diagnostics as commit comment
+      - name: Publish diagnostics (commit comment, fallback ci-logs branch)
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          {
-            echo "## pub get (tail)";            tail -n 40 /tmp/pubget.log 2>/dev/null;
-            echo "## gen-l10n (tail)";           tail -n 40 /tmp/genl10n.log 2>/dev/null;
-            echo "## analyze (tail)";            tail -n 120 /tmp/analyze.log 2>/dev/null;
-            echo "## flutter test (tail)";       tail -n 300 /tmp/flutter-test.log 2>/dev/null;
-          } > /tmp/combined.md
-          python3 - <<'PY'
-          import json, os, subprocess
-          body = open('/tmp/combined.md').read()[-45000:]
-          payload = json.dumps({'body': body})
-          sha = os.environ['GITHUB_SHA']
-          repo = os.environ['GITHUB_REPOSITORY']
-          tok = os.environ['GH_TOKEN']
-          r = subprocess.run(['curl', '-sS', '-X', 'POST',
-              f'https://api.github.com/repos/{repo}/commits/{sha}/comments',
-              '-H', f'Authorization: Bearer {tok}',
-              '-H', 'Accept: application/vnd.github+json',
-              '--data', payload], capture_output=True, text=True)
-          print(r.stdout[-300:], r.stderr[-200:])
-          PY
+        run: bash scripts/post_logs_comment.sh
+
       - name: Android scaffolding (generated if absent)
         run: |
           cd app

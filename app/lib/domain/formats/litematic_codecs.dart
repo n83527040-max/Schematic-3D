@@ -47,6 +47,9 @@ class LitematicCodecs {
     int dim(String k) {
       final v = body[k];
       if (v is NbtInt) return v.value;
+      if (v is NbtShort) return v.value;
+      if (v is NbtByte) return v.value;
+      if (v is NbtLong) return v.value;
       if (v is int) return v;
       throw const FormatException('missing dimension');
     }

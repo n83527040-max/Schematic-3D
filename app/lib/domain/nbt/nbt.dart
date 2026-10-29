@@ -1,11 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
-
 /// Minimal NBT reader/writer (both endiannesses, optional gzip), covering
 /// the tags Minecraft structure files use. Dart port of the reference
 /// Python implementation; both are asserted on the same fixture files.
 library;
+
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 const int tagEnd = 0;
 const int tagByte = 1;
@@ -86,11 +86,13 @@ class _Reader {
     return data[pos++];
   }
 
-  int _i16() => _take(2, (b, o) => b.getInt16(o, littleEndian));
-  int _i32() => _take(4, (b, o) => b.getInt32(o, littleEndian));
-  int _i64() => _take(8, (b, o) => b.getInt64(o, littleEndian));
-  double _f32() => _take(4, (b, o) => b.getFloat32(o, littleEndian));
-  double _f64() => _take(8, (b, o) => b.getFloat64(o, littleEndian));
+  Endian get _end => littleEndian ? Endian.little : Endian.big;
+
+  int _i16() => _take(2, (b, o) => b.getInt16(o, _end));
+  int _i32() => _take(4, (b, o) => b.getInt32(o, _end));
+  int _i64() => _take(8, (b, o) => b.getInt64(o, _end));
+  double _f32() => _take(4, (b, o) => b.getFloat32(o, _end));
+  double _f64() => _take(8, (b, o) => b.getFloat64(o, _end));
 
   T _take<T>(int n, T Function(ByteData, int) read) {
     if (pos + n > data.length) throw NbtException('unexpected EOF');
@@ -107,7 +109,7 @@ class _Reader {
     return s;
   }
 
-  int _u16() => _take(2, (b, o) => b.getUint16(o, littleEndian));
+  int _u16() => _take(2, (b, o) => b.getUint16(o, _end));
 
   Map<String, Object?> readCompound(int depth) {
     if (depth > 512) throw NbtException('too deep');

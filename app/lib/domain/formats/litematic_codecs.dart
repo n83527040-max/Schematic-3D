@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:typed_data';
 
 import '../model/design.dart';
 import '../nbt/nbt.dart';
@@ -66,7 +65,7 @@ class LitematicCodecs {
 
     final palRaw = body['Palette'];
     final dataRaw = body['BlockData'];
-    if (palRaw is! Map || dataRaw is! List) {
+    if (palRaw is! Map || dataRaw is! List<Object?>) {
       rep.error('sponge2.palette', 'missing Palette map or BlockData');
       return (design: null, report: rep, conv: ConversionResult(), fmt: 'sponge2');
     }
@@ -175,7 +174,7 @@ class LitematicCodecs {
     return (design: design, report: rep, conv: conv, fmt: 'sponge2');
   }
 
-  List<int>? _readVarints(List raw, int count, ValidationReport rep) {
+  List<int>? _readVarints(List<Object?> raw, int count, ValidationReport rep) {
     final data = raw;
     final out = <int>[];
     var i = 0;
@@ -308,12 +307,13 @@ class LitematicCodecs {
     }
 
     final longsRaw = region['BlockStates'];
-    if (longsRaw is! NbtList && longsRaw is! List) {
+    if (longsRaw is! NbtList && longsRaw is! List<Object?>) {
       rep.error('litematic.states', 'missing BlockStates');
       return (design: null, report: rep, conv: conv, fmt: 'litematic');
     }
-    final longs = (longsRaw is NbtList ? longsRaw.items : longsRaw as List)
-        .map((e) {
+    final longs = (longsRaw is NbtList
+            ? longsRaw.items
+            : longsRaw as List<Object?>).map((e) {
           final v = e is NbtLong ? e.value : (e as num).toInt();
           return v.toUnsigned(64);
         })

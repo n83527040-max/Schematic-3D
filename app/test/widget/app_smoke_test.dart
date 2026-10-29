@@ -10,7 +10,6 @@ import 'package:schematic_3d/data/db/app_database.dart';
 import 'package:schematic_3d/data/repos/design_repository.dart';
 import 'package:schematic_3d/data/settings/app_settings.dart';
 import 'package:schematic_3d/domain/validation/design_validator.dart';
-import 'package:schematic_3d/l10n/generated/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -81,7 +80,7 @@ void main() {
     expect(report.report.ok, isTrue);
     await repo.create(
         design: report.design!, sourceFormat: 'schematic3dJson');
-    container.read(libraryProvider.notifier).refresh();
+    await container.read(libraryProvider.notifier).refresh();
     await tester.pumpAndSettle();
     expect(find.textContaining('Tower'), findsWidgets);
   });

@@ -23,12 +23,12 @@ void main() {
         'f': 3.5,
       };
       final bytes = writeNbtBytes(root, littleEndian: true);
-      final back = readNbt(Uint8List.fromList(bytes), littleEndian: true);
+      final back = readNbt(bytes, littleEndian: true);
       final r = back.root;
       expect((r['i'] as NbtInt).value, 42);
       expect((r['l'] as NbtLong).value, -9007199254740991);
       expect(r['s'], 'héllo ✓');
-      expect((r['ia'] as List).toList(), [10, 20, 30]);
+      expect((r['ia'] as List<int>).toList(), [10, 20, 30]);
       expect(r['f'], closeTo(3.5, 1e-6));
       final list = r['list'] as NbtList;
       expect(list.items.length, 2);
@@ -38,7 +38,7 @@ void main() {
     test('big-endian variant roundtrips too', () {
       final root = <String, Object?>{'x': const NbtInt(-777)};
       final bytes = writeNbtBytes(root, littleEndian: false);
-      final back = readNbt(Uint8List.fromList(bytes), littleEndian: false);
+      final back = readNbt(bytes, littleEndian: false);
       expect((back.root['x'] as NbtInt).value, -777);
     });
   });

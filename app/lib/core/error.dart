@@ -7,31 +7,34 @@ sealed class AppFailure {
   final String? detail;
 
   @override
-  String toString() => '$runtimeType($messageKey${detail == null ? '' : ': $detail'})';
+  String toString() =>
+      '$runtimeType($messageKey${detail == null ? '' : ': $detail'})';
 }
 
 class FileUnreadable extends AppFailure {
-  const FileUnreadable([super.detail]) : super('failure.fileUnreadable');
+  const FileUnreadable([String? detail]) : super('failure.fileUnreadable', detail);
 }
 
 class UnsupportedFormat extends AppFailure {
-  const UnsupportedFormat([super.detail]) : super('failure.unsupportedFormat');
+  const UnsupportedFormat([String? detail])
+      : super('failure.unsupportedFormat', detail);
 }
 
 class InvalidDesign extends AppFailure {
-  const InvalidDesign([super.detail]) : super('failure.invalidDesign');
+  const InvalidDesign([String? detail]) : super('failure.invalidDesign', detail);
 }
 
 class DatabaseFailure extends AppFailure {
-  const DatabaseFailure([super.detail]) : super('failure.database');
+  const DatabaseFailure([String? detail]) : super('failure.database', detail);
 }
 
 class ExportFailure extends AppFailure {
-  const ExportFailure([super.detail]) : super('failure.export');
+  const ExportFailure([String? detail]) : super('failure.export', detail);
 }
 
 class PermissionDenied extends AppFailure {
-  const PermissionDenied([super.detail]) : super('failure.permissionDenied');
+  const PermissionDenied([String? detail])
+      : super('failure.permissionDenied', detail);
 }
 
 class CancelledByUser extends AppFailure {

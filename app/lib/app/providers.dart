@@ -39,6 +39,9 @@ final folderRepoProvider = Provider<FolderRepository>(
 final importLogRepoProvider = Provider<ImportLogRepository>(
     (ref) => ImportLogRepository(ref.watch(databaseProvider)));
 
+final importLogProvider = FutureProvider<List<ImportLogEntry>>(
+    (ref) => ref.watch(importLogRepoProvider).recent());
+
 final fileIoProvider = Provider<FileIoService>((_) => const FileIoService());
 
 final addonPackerProvider = Provider<AddonPacker>((_) => const AddonPacker());
@@ -109,10 +112,8 @@ class LibraryController extends Notifier<LibraryState> {
     );
     try {
       final rows = await ref.read(designRepoProvider).query(q);
-      if (!ref.mounted) return;
       state = state.copyWith(rows: rows, loading: false);
     } catch (e) {
-      if (!ref.mounted) return;
       state = state.copyWith(loading: false, error: e.toString());
     }
   }

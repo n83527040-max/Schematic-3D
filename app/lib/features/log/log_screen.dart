@@ -78,12 +78,12 @@ class LogScreen extends ConsumerWidget {
                       onTap: () {
                         if (e.designId != null &&
                             e.status != ImportStatus.failed) {
-                          Navigator.of(context).push(MaterialPageRoute(
+                          Navigator.of(context).push(MaterialPageRoute<void>(
                             builder: (_) =>
                                 DetailScreen(designId: e.designId!),
                           ));
                         } else {
-                          showDialog(
+                          showDialog<void>(
                             context: context,
                             builder: (bc) => AlertDialog(
                               title: Text(e.fileName),

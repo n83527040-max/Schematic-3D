@@ -7,6 +7,7 @@ import 'package:schematic_3d/domain/formats/block_catalog.dart';
 import 'package:schematic_3d/domain/formats/design_importer.dart';
 import 'package:schematic_3d/domain/formats/litematic_codecs.dart';
 import 'package:schematic_3d/domain/formats/mapper.dart';
+import 'package:schematic_3d/domain/model/design.dart';
 
 import '../helpers.dart';
 

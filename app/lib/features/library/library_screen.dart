@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/providers.dart';
 import '../../core/constants.dart';
 import '../../data/repos/design_repository.dart';
+import '../../data/services/addon_packer.dart';
 import '../design_detail/detail_screen.dart';
 import '../prompt/prompt_sheet.dart';
 import '../theme/theme.dart';
@@ -90,11 +91,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
             child: lib.loading
                 ? const Center(child: CircularProgressIndicator())
                 : lib.rows.isEmpty
-                    ? _EmptyLibrary(onImport: () {
-                        DefaultTabController();
-                        // switch bottom nav is handled by parent tab; guide
-                        // hint suffices here
-                      })
+                    ? const _EmptyLibrary()
                     : RefreshIndicator(
                         onRefresh: () =>
                             ref.read(libraryProvider.notifier).refresh(),
@@ -128,7 +125,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(14),
                                 onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
+                                  MaterialPageRoute<void>(
                                     builder: (_) =>
                                         DetailScreen(designId: row.id),
                                   ),
@@ -225,7 +222,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
   void _showSortSheet() {
     final l = l10n(context);
     final settings = ref.read(settingsProvider);
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
       context: context,
       builder: (bc) => SafeArea(
         child: Column(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import '../model/design.dart';
+import '../nbt/nbt.dart';
 import '../validation/design_validator.dart';
 import 'block_catalog.dart';
 import 'litematic_codecs.dart';
@@ -36,8 +37,8 @@ class DesignImporter {
 
   final Mapper mapper;
 
-  Future<ImportOutcome> importFile(File file) =>
-      importBytes(file.readAsBytesSync(), fileName: file.path.split('/').last);
+  Future<ImportOutcome> importFile(File file) async =>
+      importBytes(await file.readAsBytes(), fileName: file.path.split('/').last);
 
   ImportOutcome importBytes(Uint8List bytes, {String fileName = 'design'}) {
     final name = fileName.split('/').last.replaceAll(RegExp(r'\.(json|mcstructure|schem|schematic)$', caseSensitive: false), '');
@@ -193,7 +194,7 @@ class DesignImporter {
     if (v is NbtShort) return v.value;
     if (v is NbtInt) return v.value;
     if (v is int) return v;
-    throw const FormatException('missing $k');
+    throw FormatException('missing $k');
   }
 
   late int w, h, l;

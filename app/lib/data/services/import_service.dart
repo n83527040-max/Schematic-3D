@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import '../../domain/formats/design_importer.dart';
 import '../../domain/formats/mcstructure_codec.dart';
-import '../../domain/model/design.dart';
 import '../repos/design_repository.dart';
 import '../repos/import_log_repository.dart';
 

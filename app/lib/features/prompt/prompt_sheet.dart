@@ -10,7 +10,7 @@ import '../theme/theme.dart';
 /// (+ optional current design JSON) and COPY to clipboard. No network, no
 /// in-app AI — this is the only "AI" surface in the product.
 Future<void> showPromptSheet(BuildContext context, {Design? design}) {
-  return showModalBottomSheet(
+  return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
     builder: (_) => _PromptSheet(design: design),

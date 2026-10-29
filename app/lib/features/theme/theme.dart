@@ -68,7 +68,6 @@ class S3dTheme {
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: mcGrass,
-        content: TextStyle(color: Colors.white),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: mcAmber,

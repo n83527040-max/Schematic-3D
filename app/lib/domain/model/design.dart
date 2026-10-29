@@ -22,7 +22,12 @@ class PaletteEntry {
     final states = <String, Object>{};
     if (rawStates is Map) {
       rawStates.forEach((k, v) {
-        if (k is String && (v is bool || v is int || v is String)) {
+        if (k is! String) return;
+        if (v is bool) {
+          states[k] = v;
+        } else if (v is int) {
+          states[k] = v;
+        } else if (v is String) {
           states[k] = v;
         }
       });
@@ -134,8 +139,13 @@ class Room {
   /// x0, z0, x1, z1 (inclusive, design coordinates).
   final (int x0, int z0, int x1, int z1) bounds;
 
+  int get xMin => bounds.$1;
+  int get zMin => bounds.$2;
+  int get xMax => bounds.$3;
+  int get zMax => bounds.$4;
+
   bool contains(int x, int z) =>
-      x >= bounds.$1 && x <= bounds.$3 && z >= bounds.$2 && z <= bounds.$4;
+      x >= xMin && x <= xMax && z >= zMin && z <= zMax;
 
   /// True when this room's band overlaps a Y slice. Rooms are plan areas;
   /// when layerId is null they span all heights.

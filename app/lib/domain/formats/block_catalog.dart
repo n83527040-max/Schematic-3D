@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'mapper.dart';
+
 /// Static Bedrock block-id snapshot + Java→Bedrock mapping tables.
 /// Generated from the converter (`s3dc block-catalog`) so both stacks share
 /// one source of truth; loaded from assets at startup.
-class BlockCatalog {
+class BlockCatalog implements BlockCatalogIface {
   BlockCatalog._({
     required this.known,
     required this.javaToBedrock,

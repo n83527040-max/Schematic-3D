@@ -7,6 +7,7 @@ import 'package:schematic_3d/domain/formats/block_catalog.dart';
 import 'package:schematic_3d/domain/formats/design_importer.dart';
 import 'package:schematic_3d/domain/formats/litematic_codecs.dart';
 import 'package:schematic_3d/domain/formats/mapper.dart';
+import 'package:schematic_3d/domain/validation/design_validator.dart';
 import 'package:schematic_3d/domain/model/design.dart';
 
 import '../helpers.dart';
@@ -55,14 +56,11 @@ void main() {
   });
 
   group('full importer', () {
-    // constructed lazily so it sees the catalog adopted in setUpAll
-    DesignImporter? cached;
-    DesignImporter get imp => cached ??= DesignImporter();
 
     test('json example imports clean', () {
       final bytes = Uint8List.fromList(
           File(fixture('examples/arch-bridge-21x9x7.json')).readAsBytesSync());
-      final o = imp.importBytes(bytes, fileName: 'arch-bridge-21x9x7.json');
+      final o = DesignImporter().importBytes(bytes, fileName: 'arch-bridge-21x9x7.json');
       expect(o.ok, isTrue, reason: o.report.issues.toString());
       expect(o.design!.blockCount, greaterThan(500));
     });
@@ -72,7 +70,7 @@ void main() {
       final bytes = Uint8List.fromList(
           File(fixture('examples/cottage-12x8x12.mcstructure'))
               .readAsBytesSync());
-      final o = imp.importBytes(bytes, fileName: 'cottage.mcstructure');
+      final o = DesignImporter().importBytes(bytes, fileName: 'cottage.mcstructure');
       expect(o.ok, isTrue, reason: o.report.issues.toString());
     });
 
@@ -81,7 +79,7 @@ void main() {
           File(fixture('converter/tests/fixtures/block-library-bridge.schem'))
               .readAsBytesSync());
       final o =
-          imp.importBytes(bytes, fileName: 'block-library-bridge.schem');
+          DesignImporter().importBytes(bytes, fileName: 'block-library-bridge.schem');
       expect(o.ok, isTrue, reason: o.report.issues.toString());
       // palette fully mapped to bedrock ids
       for (final pe in o.design!.palette) {
@@ -95,7 +93,7 @@ void main() {
     test('truncated JSON reports a parse error and no design', () {
       final bytes = Uint8List.fromList(
           File(fixture('examples/broken-truncated.json')).readAsBytesSync());
-      final o = imp.importBytes(bytes, fileName: 'broken-truncated.json');
+      final o = DesignImporter().importBytes(bytes, fileName: 'broken-truncated.json');
       expect(o.ok, isFalse);
       expect(o.design, isNull);
       expect(o.report.errors.isNotEmpty, isTrue);
@@ -104,13 +102,13 @@ void main() {
     test('bad-version JSON keeps its semantic error code', () {
       final bytes = Uint8List.fromList(
           File(fixture('examples/broken-bad-version.json')).readAsBytesSync());
-      final o = imp.importBytes(bytes, fileName: 'broken-bad-version.json');
+      final o = DesignImporter().importBytes(bytes, fileName: 'broken-bad-version.json');
       expect(o.ok, isFalse);
-      expect(o.report.errors.any((e) => e.code == 'schemaVersion'), isTrue);
+      expect(o.report.errors.any((Issue e) => e.code == 'schemaVersion'), isTrue);
     });
 
     test('unknown bytes are reported, not crashed', () {
-      final o = imp.importBytes(
+      final o = DesignImporter().importBytes(
           Uint8List.fromList(List.generate(64, (i) => 0x41 + (i % 26))),
           fileName: 'mystery.dat');
       expect(o.ok, isFalse);

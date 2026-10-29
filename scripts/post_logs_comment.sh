@@ -9,13 +9,13 @@ OUT=/tmp/combined.md
   echo "## pub get (tail)";            tail -n 40 /tmp/pubget.log 2>/dev/null
   echo "## gen-l10n (tail)";            tail -n 40 /tmp/genl10n.log 2>/dev/null
   echo "## flutter analyze (tail)";     tail -n 150 /tmp/analyze.log 2>/dev/null
-  echo "## flutter test (tail)";        tail -n 320 /tmp/flutter-test.log 2>/dev/null
+  echo "## flutter test (tail)";        tail -n 1500 /tmp/flutter-test.log 2>/dev/null
 } > "$OUT"
 
 python3 - "$OUT" <<'PYEOF'
 import json, os, subprocess, sys
 
-body = open(sys.argv[1]).read()[-45000:]
+body = open(sys.argv[1]).read()[-58000:]
 payload = json.dumps({"body": body})
 sha = os.environ["GITHUB_SHA"]
 repo = os.environ["GITHUB_REPOSITORY"]

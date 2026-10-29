@@ -107,16 +107,18 @@ class DesignImporter {
       } catch (_) {/* keep raw */}
     }
     var s = data;
-    // skip BOM/whitespace for JSON check
+    // JSON detection may skip a BOM/whitespace prefix — but NEVER mutate the
+    // NBT probe (0x0A is both '\n' and the root tagCompound type byte!)
     var start = 0;
     while (start < s.length &&
-        (s[start] == 0x20 || s[start] == 0x0a || s[start] == 0x0d ||
-            s[start] == 0x09 ||
+        (s[start] == 0x20 || s[start] == 0x0d || s[start] == 0x09 ||
             (start + 2 < s.length && s[start] == 0xEF && s[start + 1] == 0xBB && s[start + 2] == 0xBF))) {
       start++;
     }
-    s = s.sublist(start);
-    if (s.isNotEmpty && s[0] == 0x7B) return DesignFormat.schematic3dJson;
+    final jsonStart = s.sublist(start);
+    if (jsonStart.isNotEmpty && jsonStart[0] == 0x7B) {
+      return DesignFormat.schematic3dJson;
+    }
     if (s.length > 4 && s[0] == 0x0A) {
       // NBT compound — try little-endian mcstructure marker
       final little = _looksLikeMcstructure(s, littleEndian: true);

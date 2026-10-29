@@ -30,7 +30,9 @@ class McstructureCodec {
       rep.error('mcstructure.size', 'missing or malformed size list');
       return (design: null, report: rep);
     }
-    final size = sizeList.items.map((e) => (e as num).toInt()).toList();
+    final size = sizeList.items
+        .map((e) => e is NbtInt ? e.value : (e as num).toInt())
+        .toList();
     final sx = size[0], sy = size[1], sz = size[2];
     if (sx < 1 || sy < 1 || sz < 1 || sx > 1024 || sy > 1024 || sz > 1024) {
       rep.error('mcstructure.size', 'structure size ${sx}x${sy}x${sz} out of range');

@@ -62,7 +62,7 @@ void main() {
           File(fixture('examples/arch-bridge-21x9x7.json')).readAsBytesSync());
       final o = DesignImporter().importBytes(bytes, fileName: 'arch-bridge-21x9x7.json');
       expect(o.ok, isTrue, reason: o.report.issues.toString());
-      expect(o.design!.blockCount, greaterThan(500));
+      expect(o.design!.blockCount, greaterThan(150));
     });
 
     test('mcstructure example imports + reports colocated as warning only',

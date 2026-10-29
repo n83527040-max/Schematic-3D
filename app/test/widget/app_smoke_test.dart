@@ -20,10 +20,14 @@ import '../helpers.dart';
 /// Advance frames until the library spinner resolves. DB calls need the
 /// real clock, so every test body runs inside tester.runAsync.
 Future<void> settle(WidgetTester t) async {
-  for (var i = 0; i < 120; i++) {
-    await t.pump(const Duration(milliseconds: 25));
-    if (t.widgetList(find.byType(CircularProgressIndicator)).isEmpty) break;
+  for (var i = 0; i < 80; i++) {
+    await Future<void>.delayed(const Duration(milliseconds: 30));
+    await t.pump();
+    final busy =
+        t.widgetList(find.byType(CircularProgressIndicator)).isNotEmpty;
+    if (!busy && i > 0) return;
   }
+  await t.pump();
 }
 
 void main() {

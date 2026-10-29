@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schematic3d-converter"
+version = "1.0.0"
+description = "Converter & validation tooling for the Schematic 3D project (schematic3d-build JSON, .mcstructure, .schem, .schematic)."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+schema = ["jsonschema>=4"]
+dev = ["pytest>=7", "jsonschema>=4"]
+
+[project.scripts]
+s3dc = "schematic3d_converter.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

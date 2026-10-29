@@ -1,0 +1,22 @@
+# build outputs & sandboxes
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+!docs/build-guide.md
+app/build/
+app/.dart_tool/
+app/.flutter-plugins*
+app/android/.gradle/
+app/ios/
+app/linux/
+app/macos/
+app/windows/
+app/web/
+dist/_base/
+dist/_full/
+_spec/
+node_modules/
+*.log
+.DS_Store

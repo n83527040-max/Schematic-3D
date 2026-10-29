@@ -1,0 +1,30 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "s3d:ghost_glow",
+      "menu_category": {
+        "category": "none"
+      }
+    },
+    "components": {
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "s3d_ghost_glow",
+          "render_layer": "blend"
+        }
+      },
+      "minecraft:light_dampening": 0,
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.1
+      },
+      "minecraft:map_color": "#FADC78",
+      "minecraft:friction": 0.4,
+      "minecraft:explosion_resistance": 3600000,
+      "minecraft:display_name": {
+        "value": "Schematic3D ghost_glow"
+      },
+      "minecraft:light_emission": 6
+    }
+  }
+}

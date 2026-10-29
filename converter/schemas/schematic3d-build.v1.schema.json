@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schematic3d.local/schemas/schematic3d-build.v1.schema.json",
+  "title": "schematic3d-build v1",
+  "type": "object",
+  "required": ["format", "schemaVersion", "name", "dimensions", "palette", "blocks"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "schematic3d-build" },
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "description": { "type": "string", "maxLength": 4000 },
+    "targetEdition": { "enum": ["bedrock", "java", "unknown"] },
+    "dimensions": {
+      "type": "object",
+      "required": ["x", "y", "z"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "integer", "minimum": 1, "maximum": 512 },
+        "y": { "type": "integer", "minimum": 1, "maximum": 512 },
+        "z": { "type": "integer", "minimum": 1, "maximum": 512 }
+      }
+    },
+    "palette": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$" },
+          "states": {
+            "type": "object",
+            "maxProperties": 32,
+            "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+            "additionalProperties": {
+              "oneOf": [
+                { "type": "boolean" },
+                { "type": "integer", "minimum": -2147483648, "maximum": 2147483647 },
+                { "type": "string", "maxLength": 64 }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2000000,
+      "items": {
+        "type": "object",
+        "required": ["x", "y", "z", "paletteIndex"],
+        "additionalProperties": false,
+        "properties": {
+          "x": { "type": "integer", "minimum": 0, "maximum": 511 },
+          "y": { "type": "integer", "minimum": 0, "maximum": 511 },
+          "z": { "type": "integer", "minimum": 0, "maximum": 511 },
+          "paletteIndex": { "type": "integer", "minimum": 0, "maximum": 4095 }
+        }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "maxItems": 2048,
+      "items": {
+        "type": "object",
+        "required": ["id", "yMin", "yMax"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_./-]{1,80}$" },
+          "name": { "type": "string", "maxLength": 120 },
+          "yMin": { "type": "integer", "minimum": 0, "maximum": 511 },
+          "yMax": { "type": "integer", "minimum": 0, "maximum": 511 }
+        }
+      }
+    },
+    "rooms": {
+      "type": "array",
+      "maxItems": 2048,
+      "items": {
+        "type": "object",
+        "required": ["id", "bounds"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_./-]{1,80}$" },
+          "name": { "type": "string", "maxLength": 120 },
+          "layerId": { "type": "string", "maxLength": 80 },
+          "bounds": {
+            "type": "object",
+            "required": ["x0", "z0", "x1", "z1"],
+            "additionalProperties": false,
+            "properties": {
+              "x0": { "type": "integer", "minimum": 0, "maximum": 511 },
+              "z0": { "type": "integer", "minimum": 0, "maximum": 511 },
+              "x1": { "type": "integer", "minimum": 0, "maximum": 511 },
+              "z1": { "type": "integer", "minimum": 0, "maximum": 511 }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "maxProperties": 64,
+      "properties": {
+        "generator": { "type": "string", "maxLength": 120 },
+        "source": { "type": "string", "maxLength": 120 },
+        "notes": { "type": "array", "maxItems": 64, "items": { "type": "string", "maxLength": 500 } },
+        "unsupportedFeatures": { "type": "array", "maxItems": 256, "items": { "type": "string", "maxLength": 300 } }
+      },
+      "additionalProperties": { "type": ["string", "number", "boolean"] }
+    }
+  }
+}

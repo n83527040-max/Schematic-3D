@@ -1,0 +1,202 @@
+[
+ {
+  "id": "minecraft:stone",
+  "tint": "ghost_stone"
+ },
+ {
+  "id": "minecraft:cobblestone",
+  "tint": "ghost_stone"
+ },
+ {
+  "id": "minecraft:deepslate_bricks",
+  "tint": "ghost_stone"
+ },
+ {
+  "id": "minecraft:oak_planks",
+  "tint": "ghost_wood"
+ },
+ {
+  "id": "minecraft:spruce_log",
+  "tint": "ghost_wood"
+ },
+ {
+  "id": "minecraft:birch_leaves",
+  "tint": "ghost_green"
+ },
+ {
+  "id": "minecraft:glass",
+  "tint": "ghost_glass"
+ },
+ {
+  "id": "minecraft:tinted_glass",
+  "tint": "ghost_glass"
+ },
+ {
+  "id": "minecraft:white_concrete",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:red_wool",
+  "tint": "ghost_red"
+ },
+ {
+  "id": "minecraft:light_blue_terracotta",
+  "tint": "ghost_blue"
+ },
+ {
+  "id": "minecraft:sand",
+  "tint": "ghost_sand"
+ },
+ {
+  "id": "minecraft:sandstone",
+  "tint": "ghost_sand"
+ },
+ {
+  "id": "minecraft:gravel",
+  "tint": "ghost_sand"
+ },
+ {
+  "id": "minecraft:obsidian",
+  "tint": "ghost_black"
+ },
+ {
+  "id": "minecraft:blackstone",
+  "tint": "ghost_black"
+ },
+ {
+  "id": "minecraft:glowstone",
+  "tint": "ghost_glow"
+ },
+ {
+  "id": "minecraft:shroomlight",
+  "tint": "ghost_glow"
+ },
+ {
+  "id": "minecraft:sea_lantern",
+  "tint": "ghost_glow"
+ },
+ {
+  "id": "minecraft:torch",
+  "tint": "ghost_glow"
+ },
+ {
+  "id": "minecraft:iron_bars",
+  "tint": "ghost_metal"
+ },
+ {
+  "id": "minecraft:gold_block",
+  "tint": "ghost_metal"
+ },
+ {
+  "id": "minecraft:copper_block",
+  "tint": "ghost_metal"
+ },
+ {
+  "id": "minecraft:diamond_block",
+  "tint": "ghost_blue"
+ },
+ {
+  "id": "minecraft:emerald_block",
+  "tint": "ghost_green"
+ },
+ {
+  "id": "minecraft:lapis_block",
+  "tint": "ghost_blue"
+ },
+ {
+  "id": "minecraft:water",
+  "tint": "ghost_blue"
+ },
+ {
+  "id": "minecraft:ice",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:snow",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:bricks",
+  "tint": "ghost_stone"
+ },
+ {
+  "id": "minecraft:oak_stairs",
+  "tint": "ghost_wood"
+ },
+ {
+  "id": "minecraft:bookshelf",
+  "tint": "ghost_wood"
+ },
+ {
+  "id": "minecraft:crafting_table",
+  "tint": "ghost_gray"
+ },
+ {
+  "id": "minecraft:moss_block",
+  "tint": "ghost_green"
+ },
+ {
+  "id": "minecraft:vine",
+  "tint": "ghost_green"
+ },
+ {
+  "id": "minecraft:nether_bricks",
+  "tint": "ghost_red"
+ },
+ {
+  "id": "minecraft:crimson_stem",
+  "tint": "ghost_red"
+ },
+ {
+  "id": "minecraft:warped_wart_block",
+  "tint": "ghost_wood"
+ },
+ {
+  "id": "minecraft:prismarine",
+  "tint": "ghost_gray"
+ },
+ {
+  "id": "minecraft:terracotta",
+  "tint": "ghost_sand"
+ },
+ {
+  "id": "minecraft:hay_block",
+  "tint": "ghost_sand"
+ },
+ {
+  "id": "minecraft:bone_block",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:end_stone",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:purpur_block",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:quartz_bricks",
+  "tint": "ghost_white"
+ },
+ {
+  "id": "minecraft:magma",
+  "tint": "ghost_red"
+ },
+ {
+  "id": "minecraft:soul_sand",
+  "tint": "ghost_sand"
+ },
+ {
+  "id": "minecraft:redstone_block",
+  "tint": "ghost_gray"
+ },
+ {
+  "id": "minecraft:air",
+  "tint": null
+ },
+ {
+  "id": "minecraft:structure_void",
+  "tint": null
+ }
+]

@@ -1,0 +1,67 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Schematic 3D Builder [BP]",
+    "description": "Build guided designs from Schematic 3D (\u00a77tr\u00a7r menus). Target: Minecraft Bedrock 26.40.5 / engine 1.26.40. By NOVA.",
+    "uuid": "be3e0039-eeb1-4f3f-a144-af0744193220",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      40
+    ]
+  },
+  "modules": [
+    {
+      "description": "Data module",
+      "type": "data",
+      "uuid": "90c6f24e-5f27-41d5-871a-bb52af655126",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "description": "Script module",
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "a4fc95ac-1eb3-4db6-ab1a-b3c610059479",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.10.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.2.0-beta"
+    },
+    {
+      "uuid": "20074c74-7933-49c6-8f46-a9007b0bbeed",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "NOVA"
+    ],
+    "license": "MIT",
+    "generated_uuids_note": "UUIDs fixed at 1.0.0; regenerate only for a fresh fork."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "resource_pack_name": "s3d",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "s3d_ghost_white": {
+      "textures": "textures/blocks/s3d_ghost_white"
+    },
+    "s3d_ghost_gray": {
+      "textures": "textures/blocks/s3d_ghost_gray"
+    },
+    "s3d_ghost_black": {
+      "textures": "textures/blocks/s3d_ghost_black"
+    },
+    "s3d_ghost_wood": {
+      "textures": "textures/blocks/s3d_ghost_wood"
+    },
+    "s3d_ghost_stone": {
+      "textures": "textures/blocks/s3d_ghost_stone"
+    },
+    "s3d_ghost_sand": {
+      "textures": "textures/blocks/s3d_ghost_sand"
+    },
+    "s3d_ghost_glass": {
+      "textures": "textures/blocks/s3d_ghost_glass"
+    },
+    "s3d_ghost_red": {
+      "textures": "textures/blocks/s3d_ghost_red"
+    },
+    "s3d_ghost_green": {
+      "textures": "textures/blocks/s3d_ghost_green"
+    },
+    "s3d_ghost_blue": {
+      "textures": "textures/blocks/s3d_ghost_blue"
+    },
+    "s3d_ghost_metal": {
+      "textures": "textures/blocks/s3d_ghost_metal"
+    },
+    "s3d_ghost_glow": {
+      "textures": "textures/blocks/s3d_ghost_glow"
+    },
+    "s3d_highlight": {
+      "textures": "textures/blocks/s3d_highlight"
+    }
+  }
+}

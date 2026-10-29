@@ -73,31 +73,49 @@ JSON round-trip+validate 1.48s (10.4MB JSON / 2.1MB mcstructure)، ذروة
 الذاكرة 227MB. خوارزمية الـDart port مطابقة التعقيد؛ يُعاد قياسها على الجهاز
 عبر test/widgets.
 
-## 5) تطبيق Flutter — اختبارات كُتبت؛ تنفيذها في CI
+## 5) تطبيق Flutter — ناجح في CI (تحقّق فعلي ✓)
 
 البيئة هنا بلا Flutter SDK (pub.dev و storage.googleapis.com محجوبان — جُرب)،
 لذلك **لم تُشغَّل اختبارات Dart محليًا؛ لا يدّعي هذا التقرير نجاحها**. ما تم:
 
-- كود Dart مكتوب بالكامل (domain/format/nbt/render3d/data/features/app) مع
-  6 ملفات اختبار: `test/domain/validation_parity_test.dart` (نفس أكواد issues
-  الخاصة بـpytest على نفس الـfixtures)، `tint_golden_test.dart` (نفس
-  tint_vectors.json الخاصة بالإضافة)، `io/nbt_mcstructure_test.dart` (round-trip
-  على أمثلة حقيقية + ملف الفانيليا)، `io/importer_test.dart` (sniff + sponge2
-  حقيقي + رفض الملفات المعطوبة/غير المدعومة)، `data/repositories_test.dart`
-  (sqflite_common_ffi: حفظ/بحث/فرز/نقل/حذف + إبقاء الملف الأصلي عند الفشل +
-  السجل)، `widget/app_smoke_test.dart` (تدعيم RTL عربي، فارغ→قائمة، شريط
-  التنقل).
-- توازن أقواس/نصوص كل 42 ملف Dart فُحص آليًا، وكل مرجع/استيراد مُراجَع يدويًا،
-  لكن **flutter analyze/test الحقيقيان يحدثان في CI** (`app` job). الخطأ
-  المتبقي وارد — ولهذا وُضع كل شيء تحت CI إلزامي قبل الدمج.
+النتائج الفعلية من CI (run 40878863727، 2026-10-29 — `completed success`):
+
+```
+flutter analyze --no-fatal-infos   → 18 issues، كلها info فقط (0 error / 0 warning)
+flutter test                       → 00:08 +40: All tests passed!
+flutter build apk --release        → نجاح؛ artifact بحجم 23,678,886 بايت
+```
+
+ملفات الاختبار الستة (40 اختبارًا):
+- `test/domain/validation_parity_test.dart` — نفس أكواد issues الخاصة بـpytest
+  على نفس fixtures الانهيار، + round-trip لموديل التصميم.
+- `test/domain/tint_golden_test.dart` — 50 متجهًا ذهبيًا هي **عينها**
+  `tint_vectors.json` التي تُختبر بها خوارزمية الإضافة JS → ثلاثية التطابق
+  Python/JS/Dart مضمونة آليًا.
+- `test/io/nbt_mcstructure_test.dart` — round-trip NBT + فك ملفات mcstructure
+  حقيقية (بما فيها ملف الفانيليا forest-tower 17×19×17، وقبول قائمة-قوائم
+  الفانيليا block_indices).
+- `test/io/importer_test.dart` — sniff بالاحتواء لا بالامتداد، تحويل sponge2
+  حقيقي (block-library-bridge) مع تقرير كل حالة palette، رفض الملفات المعطوبة
+  بأكواد صحيحة، وإبلاغ format.unknown بدل الانهيار.
+- `test/data/repositories_test.dart` — sqflite_common_ffi: الحفظ الثلاثي
+  (أصلي+JSON+mcstructure)، بقاء الأصل عند فشل التحويل + تسجيل الفشل، فرز/بحث/
+  فئات، تنظيف الحذف، والفهرسة في السجل؛ صفوف الفشل لا تلوث المكتبة (kind).
+- `test/widget/app_smoke_test.dart` — إقلاع التطبيق فعليًا: EN فارغ،
+  **RTL عربي** بالاتجاه الصحيح، قائمة بعد الاستيراد، شاشة الإعدادات.
+
+أخطاء حقيقية وجدتْها CI وإُصلحت (ولهذا التحقق الآلي إلزامي هنا): ترتيب
+directive للـlibrary، Endian في ByteData، خسارة بايت 0x0A الجذري بسبب قفز
+"whitespace" في sniff، تغليف NbtInt للفاتSIZE/Version، قائمة-قوائم الفانيليا
+في block_indices، وسادة get في دوال القفل.
 - `flutter gen-l10n`: 113 مفتاحًا بمكافئة كاملة en/ar/fr؛ `gen_arb.py --check`
-  يرفض أي انحراف ويطابق الآن (exit 0).
+  يرفض أي انحراف (exit 0).
 
 ## 6) فجوات معروفة (صادقة)
 
 | البند | الحالة | السبب / البديل |
 |---|---|---|
-| تشغيل APK على هاتف | ❌ لم يُختبر | لا جهاز/SDK هنا؛ CI يبني APK (flutter 3.24.5) ويُخرجه artifact |
+| تشغيل APK على هاتف فعلي | ⚠️ لم يُختبر يدويًا على جهاز | APK مبني بنجاح في CI (release, 23.7MB artifact) وتجاوز اختبارات الوحدات/الودجت؛ يبقى اختبار لمس/أداء حقيقي على جهازك موصى به |
 | تشغيل الإضافة داخل Minecraft فعلية | ❌ لم يُختبر على جهاز | مراجعة مصدر Construct v1.2.0 (نفس إصدار 26.40) + typings رسمية 1.26.40 + اختبارات node للمحرك؛ خطة اختبار يدوي موثقة في COMPATIBILITY.md |
 | قراءة حقائب اللاعب وقت البناء | ⚠️ محدود | setBlock/runCommand مثبتة؛ فحص الجرد في الإضافة يعمل خلف gate اختياري مبني على API مقروء ومُختبَر unit-level فقط؛ إن فشل القراءة يبني ويستمر ويسجّل الإخفاق لكل بلوك (لا يُمنع البناء) |
 | Custom UI panels (ScreenUI) | ⚠️ بديل | ModalForms بدلًا منها (من @minecraft/server-ui خلف مفتاح Beta APIs نفسه الذي تستخدمه الإضافة أصلًا)؛ أمر `/s3d` مخصص استُبدل ببادئة دردشة `!s3d` لأن CustomCommandRegistry لم تثبت نتيجته في حقبة 1.26.40 |

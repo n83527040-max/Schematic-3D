@@ -28,10 +28,16 @@ AI: the round button only copies an external-AI prompt template to the clipboard
 | `converter` pytest | **33/33 ناجح** بما فيها تحويل ملفات حقيقية (برج الغابة 17×19×17 / 1032 بلوكًا) وتطابق round-trip |
 | `bedrock_addon` node --test | **29/29 ناجح** (planner/state/engine/tint) |
 | validate_addon للـ mcaddon | **PASS** للمعبأ وغير المعبأ (UUIDs، تبعيات 2.10.0-beta، 3 تصميمات مضمّنة) |
-| اختبارات Dart للتطبيق | كُتبت (validation parity، tint golden، nbt/mcstructure، importer، repositories بـ ffi، widget smoke) — **تُنفَّذ في CI**؛ لا يوجد Flutter SDK في هذه البيئة (انظر docs/TEST_REPORT.md) |
+| اختبارات Dart للتطبيق | **40/40 ناجحة في CI** + `flutter analyze` بلا أخطاء + **بناء APK release ناجح** (artifact في آخر CI run) — انظر docs/TEST_REPORT.md |
 | تشغيل داخل Minecraft على جهاز | غير مُختبَر على جهاز فعلي هنا — التحقق تم بمراجعة كود Construct v1.2.0 و typings رسمية 1.26.40؛ التفاصيل في docs/COMPATIBILITY.md |
 
 ## البناء / Build
+
+## الحصول على الناتجين الجاهزين
+
+- **APK**: من تبويب Actions → آخر CI run ناجح → artifact باسم `apk-release`
+  (app-release.apk). أو ابنِه محليًا بالأدوات أدناه.
+- **MCAddon**: artifact باسم `mcaddon` (ملفا base + full)، أو `dist/` في المستودع.
 
 ```bash
 # المحولر + الاختبارات

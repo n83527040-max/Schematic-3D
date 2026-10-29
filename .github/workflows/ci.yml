@@ -5,6 +5,10 @@ on:
     branches: [main, "arena/**"]
   pull_request:
 
+permissions:
+  contents: read
+  discussions: write
+
 jobs:
   converter:
     name: Python converter tests
@@ -64,9 +68,9 @@ jobs:
           flutter-version: "3.24.5"
           cache: true
       - name: pub get
-        run: cd app && flutter pub get
+        run: cd app && (flutter pub get 2>&1 | tee /tmp/pubget.log)
       - name: Regenerate localizations
-        run: cd app && flutter gen-l10n
+        run: cd app && (flutter gen-l10n 2>&1 | tee /tmp/genl10n.log)
       - name: Analyze
         run: |
           cd app
@@ -77,15 +81,31 @@ jobs:
           cd app
           set -o pipefail
           flutter test --reporter expanded 2>&1 | tee /tmp/flutter-test.log
-      - name: Upload step logs
+      - name: Publish diagnostics as commit comment
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: flutter-logs
-          path: |
-            /tmp/analyze.log
-            /tmp/flutter-test.log
-          if-no-files-found: ignore
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo "## pub get (tail)";            tail -n 40 /tmp/pubget.log 2>/dev/null;
+            echo "## gen-l10n (tail)";           tail -n 40 /tmp/genl10n.log 2>/dev/null;
+            echo "## analyze (tail)";            tail -n 120 /tmp/analyze.log 2>/dev/null;
+            echo "## flutter test (tail)";       tail -n 300 /tmp/flutter-test.log 2>/dev/null;
+          } > /tmp/combined.md
+          python3 - <<'PY'
+          import json, os, subprocess
+          body = open('/tmp/combined.md').read()[-45000:]
+          payload = json.dumps({'body': body})
+          sha = os.environ['GITHUB_SHA']
+          repo = os.environ['GITHUB_REPOSITORY']
+          tok = os.environ['GH_TOKEN']
+          r = subprocess.run(['curl', '-sS', '-X', 'POST',
+              f'https://api.github.com/repos/{repo}/commits/{sha}/comments',
+              '-H', f'Authorization: Bearer {tok}',
+              '-H', 'Accept: application/vnd.github+json',
+              '--data', payload], capture_output=True, text=True)
+          print(r.stdout[-300:], r.stderr[-200:])
+          PY
       - name: Android scaffolding (generated if absent)
         run: |
           cd app
